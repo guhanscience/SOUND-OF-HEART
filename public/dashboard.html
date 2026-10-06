@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | Sound of Heart</title>
+    <link rel="icon" href="Sound of Heart Logo.png">
+    <link
+        rel="stylesheet"
+        href="dashboard.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="dashboard-nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            Sound of <span>Heart</span>
+        </a>
+
+
+        <div class="nav-right">
+
+            <span id="userName">
+                Loading...
+            </span>
+
+            <button id="logoutButton">
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="dashboard">
+
+        <section class="welcome">
+
+            <p class="section-tag">
+                Customer Dashboard
+            </p>
+
+            <h1>
+                Welcome,
+                <span id="welcomeName">
+                    Customer
+                </span>
+            </h1>
+
+            <p>
+                Manage your speaker repair
+                requests from one place.
+            </p>
+
+        </section>
+
+
+        <section class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <h2>
+                    Book a Repair
+                </h2>
+
+                <p>
+                    Tell us about your speaker
+                    and the problem you're
+                    experiencing.
+                </p>
+
+
+                <form id="repairForm">
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="9876543210"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="speaker">
+                            Speaker Type
+                        </label>
+
+                        <select
+                            id="speaker"
+                            required
+                        >
+
+                            <option value="">
+                                Select speaker type
+                            </option>
+
+                            <option>
+                                Bluetooth Speaker
+                            </option>
+
+                            <option>
+                                Home Speaker / Woofer
+                            </option>
+
+                            <option>
+                                Soundbar
+                            </option>
+
+                            <option>
+                                Audio System
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="problem">
+                            Describe the Problem
+                        </label>
+
+                        <textarea
+                            id="problem"
+                            rows="5"
+                            placeholder="Tell us what is wrong..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Submit Repair Request
+                    </button>
+
+
+                    <p
+                        id="formMessage"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <h2>
+                    Your Repairs
+                </h2>
+
+                <p>
+                    Your previous repair requests
+                </p>
+
+
+                <div id="repairsList">
+
+                    <p class="loading">
+                        Loading repairs...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>
