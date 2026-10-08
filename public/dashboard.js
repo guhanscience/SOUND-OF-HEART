@@ -276,14 +276,30 @@ repairForm.addEventListener(
 
 
             formMessage.textContent =
-                "Repair request submitted successfully!";
+                "Repair request submitted successfully! Opening WhatsApp...";
 
             formMessage.style.color =
                 "#7ee787";
 
+            // Prepare the repair details for WhatsApp.
+            const customerName =
+                welcomeName.textContent.trim();
+
+            const whatsappMessage =
+                `New Speaker Repair Request%0A%0A` +
+                `Customer Name: ${encodeURIComponent(customerName)}%0A` +
+                `Phone: ${encodeURIComponent(phone)}%0A` +
+                `Speaker Type: ${encodeURIComponent(speaker)}%0A` +
+                `Problem: ${encodeURIComponent(problem)}`;
+
+            // WhatsApp number in international format (India).
+            const whatsappUrl =
+                `https://wa.me/919952433437?text=${whatsappMessage}`;
+
+            // Open WhatsApp with the message ready to send.
+            window.open(whatsappUrl, "_blank");
 
             repairForm.reset();
-
 
             await loadRepairs();
 
