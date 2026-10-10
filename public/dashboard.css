@@ -261,7 +261,6 @@ body {
         );
 
     pointer-events:none;
-    margin-bottom:"10px";
 }
 
 .ai-card::after{
@@ -282,7 +281,6 @@ body {
         );
 
     pointer-events:none;
-    margin-bottom:"5px";
 }
 
 .ai-card h2{
