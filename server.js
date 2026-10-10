@@ -145,7 +145,8 @@ function getUserFromRequest(req) {
     }
 
     return {
-        id: session.id,
+        id: session.user_id,
+        session_id: session.session_id,
         name: session.name,
         email: session.email,
         token: session.token

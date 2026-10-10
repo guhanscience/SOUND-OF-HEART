@@ -1,6 +1,30 @@
 const form = document.getElementById("loginForm");
 const message = document.getElementById("loginMessage");
 
+if (localStorage.getItem("authToken")) {
+    fetch("/api/me", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/dashboard.html";
+                return;
+            }
+
+            localStorage.removeItem("authToken");
+        })
+        .catch(() => {
+            localStorage.removeItem("authToken");
+        });
+}
+
+if (!form || !message) {
+    throw new Error("Login form elements are missing.");
+}
+
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
