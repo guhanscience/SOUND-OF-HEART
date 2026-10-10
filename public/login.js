@@ -37,7 +37,6 @@ form.addEventListener("submit", async function (e) {
             return;
         }
 
-        // Save authentication token
         localStorage.setItem("authToken", data.token);
 
         message.textContent =

@@ -64,8 +64,6 @@ db.exec(`
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-// Serve files from public folder
 app.use(express.static(path.join(__dirname, "public")));
 
 function createSession(userId) {
@@ -136,7 +134,6 @@ function getUserFromRequest(req) {
         return null;
     }
 
-    // Session expired
     if (session.expires_at < Date.now()) {
 
         db.prepare(`
