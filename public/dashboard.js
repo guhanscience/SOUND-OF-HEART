@@ -452,6 +452,10 @@ async function askSpeakerAI() {
 
         if(data.problem){
 
+            const followUpQuestions = Array.isArray(data.questions)
+                ? `<br><br>Questions to confirm:<br>• ${data.questions.join("<br>• ")}`
+                : "";
+
             answer = `
                 <strong>${data.problem}</strong>
 
@@ -464,6 +468,7 @@ async function askSpeakerAI() {
 
                 Solutions:<br>
                 • ${data.solutions.join("<br>• ")}
+                ${followUpQuestions}
             `;
 
         } else {

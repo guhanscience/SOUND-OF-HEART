@@ -653,6 +653,60 @@ function cleanExpiredSessions() {
     `).run(Date.now());
 }
 
+function findBestSpeakerMatch(question) {
+    const normalizedQuestion = question.toLowerCase();
+    const questionWords = new Set(
+        normalizedQuestion.match(/[a-z0-9]+/g) || []
+    );
+
+    const filteredWords = new Set(
+        [...questionWords].filter(word =>
+            !["the", "and", "for", "with", "my", "is", "it", "a", "an", "does", "have", "has", "been", "from", "when", "why", "how", "are", "can", "not", "this", "that", "speaker"].includes(word)
+        )
+    );
+
+    const scored = speakerKnowledge.map(item => {
+        const problemText = item.problem.toLowerCase();
+        const problemWords = new Set(
+            problemText.match(/[a-z0-9]+/g) || []
+        );
+
+        let score = 0;
+
+        for (const word of filteredWords) {
+            if (problemWords.has(word)) {
+                score += 2;
+            }
+        }
+
+        if (problemText.includes(normalizedQuestion)) {
+            score += 5;
+        }
+
+        for (const entry of item.questions || []) {
+            const entryText = entry.toLowerCase();
+            if (entryText.includes(normalizedQuestion)) {
+                score += 3;
+            }
+
+            for (const word of filteredWords) {
+                if (entryText.includes(word)) {
+                    score += 1;
+                }
+            }
+        }
+
+        return {
+            item,
+            score
+        };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+
+    return scored[0]?.score > 0 ? scored[0].item : null;
+}
+
 
 setInterval(
     cleanExpiredSessions,
@@ -676,24 +730,7 @@ app.post(
             });
         }
 
-        let found = null;
-
-        for (const item of speakerKnowledge) {
-
-            const words =
-                item.problem
-                .toLowerCase()
-                .split(" ");
-
-            if (
-                words.some(word =>
-                    question.includes(word)
-                )
-            ) {
-                found = item;
-                break;
-            }
-        }
+        const found = findBestSpeakerMatch(question);
 
         if (!found) {
 
