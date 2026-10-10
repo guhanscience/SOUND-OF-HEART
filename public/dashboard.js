@@ -407,6 +407,19 @@ function escapeHtml(value) {
     return div.innerHTML;
 }
 
+const aiQuestionInput = document.getElementById("aiQuestion");
+
+if (aiQuestionInput) {
+    aiQuestionInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            askSpeakerAI();
+        }
+    });
+}
+
+loadDashboard();
+
 async function askSpeakerAI() {
 
     const input =
