@@ -6,7 +6,7 @@ const crypto = require("crypto");
 require("dotenv").config();
 
 const app = express();
-
+const speakerKnowledge = require("./speaker_knowledge.json");
 const PORT = process.env.PORT || 3000;
 const SESSION_SECRET =
     process.env.SESSION_SECRET || "change-this-secret-key";
@@ -659,6 +659,61 @@ function cleanExpiredSessions() {
 setInterval(
     cleanExpiredSessions,
     60 * 60 * 1000
+);
+
+app.post(
+    "/api/speaker-ai",
+    requireAuth,
+    (req, res) => {
+
+        const question =
+            req.body.question
+            ?.toLowerCase()
+            .trim();
+
+        if (!question) {
+            return res.status(400).json({
+                success:false,
+                answer:"Please enter a question."
+            });
+        }
+
+        let found = null;
+
+        for (const item of speakerKnowledge) {
+
+            const words =
+                item.problem
+                .toLowerCase()
+                .split(" ");
+
+            if (
+                words.some(word =>
+                    question.includes(word)
+                )
+            ) {
+                found = item;
+                break;
+            }
+        }
+
+        if (!found) {
+
+            return res.json({
+                success:true,
+                answer:
+                "I could not identify the issue. Please provide more details about your speaker problem."
+            });
+        }
+
+        return res.json({
+            success:true,
+            problem:found.problem,
+            causes:found.causes,
+            questions:found.questions,
+            solutions:found.solutions
+        });
+    }
 );
 
 app.listen(PORT, "0.0.0.0", () => {

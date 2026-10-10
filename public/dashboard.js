@@ -316,11 +316,6 @@ repairForm.addEventListener(
     }
 );
 
-
-/* --------------------------------
-   DELETE REPAIR
--------------------------------- */
-
 async function deleteRepair(id) {
 
     const confirmed =
@@ -372,11 +367,6 @@ async function deleteRepair(id) {
     }
 }
 
-
-/* --------------------------------
-   LOGOUT
--------------------------------- */
-
 logoutButton.addEventListener(
     "click",
     async function () {
@@ -407,11 +397,6 @@ logoutButton.addEventListener(
     }
 );
 
-
-/* --------------------------------
-   HTML SECURITY
--------------------------------- */
-
 function escapeHtml(value) {
 
     const div =
@@ -422,9 +407,87 @@ function escapeHtml(value) {
     return div.innerHTML;
 }
 
+async function askSpeakerAI() {
 
-/* --------------------------------
-   START DASHBOARD
--------------------------------- */
+    const input =
+        document.getElementById("aiQuestion");
 
-loadDashboard();
+    const question =
+        input.value.trim();
+
+    if(!question){
+        return;
+    }
+
+    const chat =
+        document.getElementById("aiChatBox");
+
+    chat.innerHTML += `
+        <div class="ai-user">
+            <strong>You:</strong><br>
+            ${question}
+        </div>
+    `;
+
+    input.value = "";
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/speaker-ai",
+                {
+                    method:"POST",
+                    headers:getAuthHeaders(),
+                    body:JSON.stringify({
+                        question
+                    })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        let answer = "";
+
+        if(data.problem){
+
+            answer = `
+                <strong>${data.problem}</strong>
+
+                <br><br>
+
+                Causes:<br>
+                • ${data.causes.join("<br>• ")}
+
+                <br><br>
+
+                Solutions:<br>
+                • ${data.solutions.join("<br>• ")}
+            `;
+
+        } else {
+
+            answer = data.answer;
+        }
+
+        chat.innerHTML += `
+            <div class="ai-bot">
+                <strong>Wolfheart AI</strong>
+                <br><br>
+                ${answer}
+            </div>
+        `;
+
+        chat.scrollTop =
+            chat.scrollHeight;
+
+    } catch(error){
+
+        chat.innerHTML += `
+            <div class="ai-bot">
+                Server connection error.
+            </div>
+        `;
+    }
+}

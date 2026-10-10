@@ -11,7 +11,7 @@
     >
 
     <title>Dashboard | Sound of Heart</title>
-    <link rel="icon" type="image/png" href="/Sound of Heart Logo.png">
+    <link rel="icon" type="image/png" href="public\Sound of Heart Logo.png">
     <link
         rel="stylesheet"
         href="dashboard.css"
@@ -45,7 +45,7 @@
 
     </nav>
 
-
+</div>
     <main class="dashboard">
 
         <section class="welcome">
@@ -101,7 +101,41 @@
 
                     </div>
 
+                    <div class="dashboard-card ai-card">
 
+                        <h2>Wolfheart AI Assistant</h2>
+
+                        <p>
+                            Advanced Speaker Diagnosis System
+                        </p>
+
+                        <div class="ai-status">
+                            <span class="status-dot"></span>
+                            Wolfheart AI Online
+                        </div>
+
+                        <div
+                            id="aiChatBox"
+                            class="ai-chat-box">
+                        </div>
+
+                        <div class="ai-input-area">
+
+                            <input
+                                id="aiQuestion"
+                                type="text"
+                                placeholder="Describe your speaker problem...">
+
+                            <button
+                                class="ai-send-btn"
+                                onclick="askSpeakerAI()">
+                                Ask AI
+                            </button>
+
+                        </div>
+
+                    </div>
+                    
                     <div class="form-group">
 
                         <label for="speaker">

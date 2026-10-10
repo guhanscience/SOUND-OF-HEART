@@ -1,0 +1,103 @@
+[
+  {
+    "problem": "Speaker not turning on",
+    "causes": [
+      "Battery completely discharged",
+      "Faulty power button",
+      "Damaged charging circuit",
+      "Battery failure"
+    ],
+    "questions": [
+      "Does the charging LED light up?",
+      "Have you tried another charger?",
+      "Did the speaker recently fall or get wet?"
+    ],
+    "solutions": [
+      "Charge for 30 minutes",
+      "Test with another charger",
+      "Inspect charging port",
+      "Replace battery if necessary"
+    ]
+  },
+  {
+    "problem": "Speaker not charging",
+    "causes": [
+      "Defective USB cable",
+      "Dirty charging port",
+      "Damaged charging IC",
+      "Battery failure"
+    ],
+    "questions": [
+      "Have you tried a different cable?",
+      "Is the charging light blinking?",
+      "Does the charging port feel loose?"
+    ],
+    "solutions": [
+      "Replace cable",
+      "Clean charging port",
+      "Check charging voltage",
+      "Replace battery"
+    ]
+  },
+  {
+    "problem": "No sound from speaker",
+    "causes": [
+      "Volume muted",
+      "Bluetooth disconnected",
+      "Amplifier fault",
+      "Speaker driver damaged"
+    ],
+    "questions": [
+      "Is Bluetooth connected?",
+      "Can you hear startup sounds?",
+      "Does the volume change?"
+    ],
+    "solutions": [
+      "Reconnect Bluetooth",
+      "Increase volume",
+      "Test with another device",
+      "Inspect speaker driver"
+    ]
+  },
+  {
+    "problem": "Bluetooth not connecting",
+    "causes": [
+      "Device already paired elsewhere",
+      "Bluetooth module fault",
+      "Software issue",
+      "Distance too far"
+    ],
+    "questions": [
+      "Does the speaker appear in Bluetooth search?",
+      "Have you restarted both devices?",
+      "Is another phone connected?"
+    ],
+    "solutions": [
+      "Forget and pair again",
+      "Reset speaker",
+      "Move closer",
+      "Update firmware"
+    ]
+  },
+  {
+    "problem": "Distorted audio",
+    "causes": [
+      "Blown speaker cone",
+      "Amplifier clipping",
+      "Loose wiring",
+      "Damaged audio file"
+    ],
+    "questions": [
+      "Does distortion happen at all volumes?",
+      "Have you tested another song?",
+      "Did the speaker recently fall?"
+    ],
+    "solutions": [
+      "Lower volume",
+      "Inspect speaker cone",
+      "Check internal wiring",
+      "Replace damaged driver"
+    ]
+  }
+  
+]
