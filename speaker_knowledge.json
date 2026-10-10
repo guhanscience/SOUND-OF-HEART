@@ -98,6 +98,2005 @@
       "Check internal wiring",
       "Replace damaged driver"
     ]
+  },
+  {
+    "problem": "Speaker battery drains quickly",
+    "causes": [
+      "High volume use",
+      "Old battery",
+      "Charging port issue",
+      "Background features enabled"
+    ],
+    "questions": [
+      "How long does a full charge usually last?",
+      "Do you play at maximum volume frequently?",
+      "Has the battery been used for years?"
+    ],
+    "solutions": [
+      "Lower playback volume",
+      "Replace aging battery",
+      "Check charging port and cable",
+      "Disable unnecessary features"
+    ]
+  },
+  {
+    "problem": "Speaker powers off on its own",
+    "causes": [
+      "Overheating",
+      "Low battery",
+      "Faulty power switch",
+      "Software crash"
+    ],
+    "questions": [
+      "Does it shut down after a while without input?",
+      "Is it hot to the touch?",
+      "Does it happen only at low battery?"
+    ],
+    "solutions": [
+      "Let the speaker cool down",
+      "Charge fully before use",
+      "Inspect power button",
+      "Reset the device"
+    ]
+  },
+  {
+    "problem": "Speaker does not turn off",
+    "causes": [
+      "Sticky power button",
+      "Faulty control board",
+      "Battery issue",
+      "Auto power feature enabled"
+    ],
+    "questions": [
+      "Does the power button feel stuck?",
+      "Does it turn off only after a long wait?",
+      "Did it start after a drop?"
+    ],
+    "solutions": [
+      "Clean power button area",
+      "Check button mechanism",
+      "Power-cycle the speaker",
+      "Repair control board"
+    ]
+  },
+  {
+    "problem": "Speaker keeps reconnecting to the wrong device",
+    "causes": [
+      "Multiple paired devices",
+      "Weak signal",
+      "Outdated Bluetooth list",
+      "Device interference"
+    ],
+    "questions": [
+      "How many devices are paired to the speaker?",
+      "Does it reconnect after moving closer?",
+      "Have you recently paired a new phone?"
+    ],
+    "solutions": [
+      "Forget unused devices",
+      "Move closer to source",
+      "Restart Bluetooth pairing",
+      "Reset speaker memory"
+    ]
+  },
+  {
+    "problem": "Speaker volume changes by itself",
+    "causes": [
+      "Button fault",
+      "Nearby IR or wireless interference",
+      "Amplifier issue",
+      "Software glitch"
+    ],
+    "questions": [
+      "Does the volume change even without touching controls?",
+      "Is the speaker near a remote or wireless signal source?",
+      "Did it start after an update?"
+    ],
+    "solutions": [
+      "Check button contacts",
+      "Reduce wireless interference",
+      "Update firmware",
+      "Reset to factory settings"
+    ]
+  },
+  {
+    "problem": "Speaker makes crackling noise",
+    "causes": [
+      "Loose connection",
+      "Water damage",
+      "Speaker cone damage",
+      "Bad audio source"
+    ],
+    "questions": [
+      "Does the crackle happen with all audio sources?",
+      "Did the speaker get wet?",
+      "Does it occur at high volume only?"
+    ],
+    "solutions": [
+      "Test with another device",
+      "Inspect wiring and joints",
+      "Dry and clean speaker internals",
+      "Replace damaged driver"
+    ]
+  },
+  {
+    "problem": "Speaker microphone is not working",
+    "causes": [
+      "Microphone disabled",
+      "Dust or debris covering mic",
+      "Damaged mic module",
+      "Bluetooth call mismatch"
+    ],
+    "questions": [
+      "Is the mic enabled in the connected device settings?",
+      "Does the sound reach the mic when speaking?",
+      "Has the speaker been dropped recently?"
+    ],
+    "solutions": [
+      "Enable microphone permissions",
+      "Clean the microphone opening",
+      "Test with another device",
+      "Replace microphone unit"
+    ]
+  },
+  {
+    "problem": "Speaker not detected by the phone",
+    "causes": [
+      "Bluetooth disabled",
+      "Speaker in pairing mode issue",
+      "Out-of-range device",
+      "Old pairing records"
+    ],
+    "questions": [
+      "Is Bluetooth enabled on the phone?",
+      "Is the speaker in pairing mode?",
+      "Are both devices within range?"
+    ],
+    "solutions": [
+      "Turn on Bluetooth",
+      "Reset pairing mode",
+      "Forget stale pairings",
+      "Bring devices closer"
+    ]
+  },
+  {
+    "problem": "Speaker sound is too low",
+    "causes": [
+      "Volume low",
+      "Output profile issue",
+      "Driver damage",
+      "Weak battery"
+    ],
+    "questions": [
+      "Does the sound remain low at full volume?",
+      "Is the speaker battery low?",
+      "Did the volume settings change on the phone?"
+    ],
+    "solutions": [
+      "Raise volume on both devices",
+      "Check equalizer settings",
+      "Test with another source",
+      "Inspect speaker driver"
+    ]
+  },
+  {
+    "problem": "Speaker sound is too loud",
+    "causes": [
+      "Volume boost enabled",
+      "App or EQ settings",
+      "Amplifier fault",
+      "Damaged volume control"
+    ],
+    "questions": [
+      "Does the speaker become loud with no input?",
+      "Is the equalizer or booster enabled?",
+      "Does it happen across all connected devices?"
+    ],
+    "solutions": [
+      "Reduce volume settings",
+      "Disable audio boost",
+      "Check amplifier circuit",
+      "Replace volume control"
+    ]
+  },
+  {
+    "problem": "Speaker produces buzzing sound",
+    "causes": [
+      "Ground loop",
+      "Loose cabinet screws",
+      "Driver rubbing",
+      "Power supply interference"
+    ],
+    "questions": [
+      "Does the buzz happen at all volumes?",
+      "Is it worse when charging?",
+      "Have screws or housing loosened?"
+    ],
+    "solutions": [
+      "Tighten cabinet screws",
+      "Use a clean power source",
+      "Check for internal rubbing",
+      "Repair grounding issue"
+    ]
+  },
+  {
+    "problem": "Speaker won’t stay paired",
+    "causes": [
+      "Signal interference",
+      "Distance issue",
+      "Old pairing cache",
+      "Speaker hardware fault"
+    ],
+    "questions": [
+      "Does pairing drop while moving around?",
+      "Does the same issue happen with multiple devices?",
+      "Have you reset the speaker before?"
+    ],
+    "solutions": [
+      "Delete stale pairings",
+      "Reduce interference",
+      "Move closer to the source",
+      "Reset and re-pair"
+    ]
+  },
+  {
+    "problem": "Speaker cuts out during playback",
+    "causes": [
+      "Low battery",
+      "Signal drop",
+      "Overheating",
+      "Loose internal wiring"
+    ],
+    "questions": [
+      "Does it cut out at specific volumes?",
+      "Is it worse when the battery is low?",
+      "Does it happen only when moving around?"
+    ],
+    "solutions": [
+      "Charge the speaker",
+      "Improve Bluetooth signal strength",
+      "Allow cooling periods",
+      "Inspect internal wiring"
+    ]
+  },
+  {
+    "problem": "Speaker echo is heard during calls",
+    "causes": [
+      "Microphone feedback",
+      "Speaker placed too close to mic",
+      "Bluetooth re-connection",
+      "Poor call settings"
+    ],
+    "questions": [
+      "Does echo happen only during calls?",
+      "Are you speaking close to the speaker?",
+      "Does it happen on both devices?"
+    ],
+    "solutions": [
+      "Move microphone away from speaker",
+      "Test another call app",
+      "Reconnect the audio link",
+      "Disable call enhancement features"
+    ]
+  },
+  {
+    "problem": "Speaker audio is delayed",
+    "causes": [
+      "Bluetooth latency",
+      "Device processing delay",
+      "Outdated firmware",
+      "Audio app issue"
+    ],
+    "questions": [
+      "Does the delay happen with all video apps?",
+      "Is it worse on a specific phone?",
+      "Did the issue start after firmware update?"
+    ],
+    "solutions": [
+      "Use low-latency mode",
+      "Update firmware",
+      "Restart paired device",
+      "Test another app or source"
+    ]
+  },
+  {
+    "problem": "Speaker does not charge from USB port",
+    "causes": [
+      "Power supply issue",
+      "Damaged port pins",
+      "Bad USB cable",
+      "Charging circuit fault"
+    ],
+    "questions": [
+      "Have you tried another charger or cable?",
+      "Does the port look bent or dirty?",
+      "Is the charging LED off?"
+    ],
+    "solutions": [
+      "Try a different charger",
+      "Clean the port carefully",
+      "Replace the cable",
+      "Service charging circuit"
+    ]
+  },
+  {
+    "problem": "Speaker gets unusually hot",
+    "causes": [
+      "Extended use at high volume",
+      "Internal short",
+      "Charging while playing",
+      "Blocked ventilation"
+    ],
+    "questions": [
+      "Does it heat up while charging?",
+      "Is it hot only at max volume?",
+      "Is the speaker covered or enclosed?"
+    ],
+    "solutions": [
+      "Stop using at high volume",
+      "Avoid charging while playing",
+      "Ensure airflow around speaker",
+      "Professional inspection for short"
+    ]
+  },
+  {
+    "problem": "Speaker has intermittent sound",
+    "causes": [
+      "Loose battery connection",
+      "Wire damage",
+      "Driver heat stress",
+      "Bluetooth dropout"
+    ],
+    "questions": [
+      "Does the sound cut in and out randomly?",
+      "Is it worse when moving the speaker?",
+      "Does it occur with wired input too?"
+    ],
+    "solutions": [
+      "Check battery terminals",
+      "Inspect wires and solder joints",
+      "Reduce heat exposure",
+      "Reconnect or repair Bluetooth"
+    ]
+  },
+  {
+    "problem": "Speaker has one side quieter than the other",
+    "causes": [
+      "Unbalanced driver",
+      "Loose wire on one channel",
+      "Dust blocking one cone",
+      "Amplifier imbalance"
+    ],
+    "questions": [
+      "Does one side sound weaker on all audio?",
+      "Have you checked both speaker drivers?",
+      "Did the speaker get dropped recently?"
+    ],
+    "solutions": [
+      "Inspect both drivers",
+      "Check channel wiring",
+      "Clean the speaker cone",
+      "Balance or repair amplifier"
+    ]
+  },
+  {
+    "problem": "Speaker button controls do not respond",
+    "causes": [
+      "Button stuck or dirty",
+      "Control board fault",
+      "Moisture inside controls",
+      "Battery voltage issue"
+    ],
+    "questions": [
+      "Do any buttons work at all?",
+      "Did the speaker get wet recently?",
+      "Does it respond after rebooting?"
+    ],
+    "solutions": [
+      "Clean button contacts",
+      "Dry the control area",
+      "Reboot the speaker",
+      "Repair or replace control board"
+    ]
+  },
+  {
+    "problem": "Speaker app cannot find the device",
+    "causes": [
+      "App permissions denied",
+      "Bluetooth disabled",
+      "Device in low-power mode",
+      "Outdated app version"
+    ],
+    "questions": [
+      "Is the app allowed to use Bluetooth?",
+      "Is the device awake and visible?",
+      "Have you updated the app recently?"
+    ],
+    "solutions": [
+      "Grant required permissions",
+      "Update the app",
+      "Restart both device and speaker",
+      "Re-pair from scratch"
+    ]
+  },
+  {
+    "problem": "Speaker sounds muffled",
+    "causes": [
+      "Dust on speaker cone",
+      "Blocked front grille",
+      "Water trapped inside",
+      "Driver damage"
+    ],
+    "questions": [
+      "Does it happen for all audio sources?",
+      "Is the grille covered by dust or cloth?",
+      "Did the speaker get wet?"
+    ],
+    "solutions": [
+      "Clean dust from the cone",
+      "Remove obstructions from grille",
+      "Dry the speaker thoroughly",
+      "Replace damaged driver"
+    ]
+  },
+  {
+    "problem": "Speaker audio sounds flat",
+    "causes": [
+      "EQ settings changed",
+      "Low battery output",
+      "Damaged speaker cone",
+      "Poor source quality"
+    ],
+    "questions": [
+      "Does the flat sound happen on all apps?",
+      "Is the battery low during playback?",
+      "Have you changed equalizer settings recently?"
+    ],
+    "solutions": [
+      "Reset equalizer settings",
+      "Charge the speaker",
+      "Test with another source",
+      "Inspect or replace driver"
+    ]
+  },
+  {
+    "problem": "Speaker plays only static",
+    "causes": [
+      "Bad input cable",
+      "Wireless interference",
+      "RF module issue",
+      "Damaged audio jack"
+    ],
+    "questions": [
+      "Does static happen on both wired and wireless input?",
+      "Are you near other wireless devices?",
+      "Is the cable damaged or loose?"
+    ],
+    "solutions": [
+      "Replace input cable",
+      "Move away from interference",
+      "Check the audio jack",
+      "Repair RF module"
+    ]
+  },
+  {
+    "problem": "Speaker produces hum noise",
+    "causes": [
+      "Power supply noise",
+      "Grounding issue",
+      "Amplifier fault",
+      "Cable interference"
+    ],
+    "questions": [
+      "Does the hum occur while plugged in?",
+      "Is the hum present with no input?",
+      "Does it change when you move the cable?"
+    ],
+    "solutions": [
+      "Try a different power adapter",
+      "Secure grounding",
+      "Replace cable if damaged",
+      "Inspect amplifier board"
+    ]
+  },
+  {
+    "problem": "Speaker won’t pair after reset",
+    "causes": [
+      "Reset not completed",
+      "Rogue pairing list",
+      "Hardware issue",
+      "Battery too low"
+    ],
+    "questions": [
+      "Did the speaker fully restart after reset?",
+      "Is the battery sufficiently charged?",
+      "Does it still show unavailable devices?"
+    ],
+    "solutions": [
+      "Repeat the reset procedure",
+      "Charge the speaker first",
+      "Delete old pairings",
+      "Check hardware for faults"
+    ]
+  },
+  {
+    "problem": "Speaker stops working after water exposure",
+    "causes": [
+      "Corrosion",
+      "Short circuit",
+      "Port contamination",
+      "Speaker cone swelling"
+    ],
+    "questions": [
+      "How long ago did it get wet?",
+      "Did the speaker still power on after getting wet?",
+      "Was it left in a humid environment?"
+    ],
+    "solutions": [
+      "Dry it completely",
+      "Remove corrosion gently",
+      "Clean the charging port",
+      "Replace damaged components"
+    ]
+  },
+  {
+    "problem": "Speaker lights do not work",
+    "causes": [
+      "Failed indicator LED",
+      "Battery issue",
+      "Control board fault",
+      "Software setting disabled"
+    ],
+    "questions": [
+      "Do any lights come on at all?",
+      "Does the speaker still sound normally?",
+      "Did the lights stop suddenly?"
+    ],
+    "solutions": [
+      "Check power state",
+      "Replace indicator LED",
+      "Inspect control board",
+      "Reset device settings"
+    ]
+  },
+  {
+    "problem": "Speaker makes a rattling noise",
+    "causes": [
+      "Loose debris inside",
+      "Speaker cone damage",
+      "Cabinet screws loose",
+      "Metal vibration"
+    ],
+    "questions": [
+      "Does the rattle happen when the speaker is moved?",
+      "Is it worse at low frequencies?",
+      "Have you checked for loose objects inside?"
+    ],
+    "solutions": [
+      "Remove debris from inside",
+      "Tighten speaker housing",
+      "Inspect cone and surround",
+      "Replace damaged parts"
+    ]
+  },
+  {
+    "problem": "Speaker audio skips or stutters",
+    "causes": [
+      "Weak Bluetooth signal",
+      "Device performance issue",
+      "Corrupted audio file",
+      "Low memory on source device"
+    ],
+    "questions": [
+      "Does the problem happen on all files?",
+      "Is the source phone low on memory?",
+      "Is the speaker far from the paired device?"
+    ],
+    "solutions": [
+      "Move closer to the source",
+      "Clear source device memory",
+      "Test another file",
+      "Reset the audio connection"
+    ]
+  },
+  {
+    "problem": "Speaker output is mono instead of stereo",
+    "causes": [
+      "Pairing issue",
+      "Source device stereo setting",
+      "Driver fault",
+      "Firmware bug"
+    ],
+    "questions": [
+      "Does it happen with all content?",
+      "Is the source device set to stereo?",
+      "Did it start after pairing another speaker?"
+    ],
+    "solutions": [
+      "Check source device audio settings",
+      "Re-pair speakers",
+      "Update firmware",
+      "Check left and right drivers"
+    ]
+  },
+  {
+    "problem": "Speaker turns on but no sound plays",
+    "causes": [
+      "Muted source",
+      "Audio output mismatch",
+      "Driver disconnected",
+      "Software stuck"
+    ],
+    "questions": [
+      "Does the speaker show a connected status?",
+      "Are the source volume and output correct?",
+      "Did the speaker recently fall?"
+    ],
+    "solutions": [
+      "Check volume and output device",
+      "Restart the source device",
+      "Inspect speaker driver connections",
+      "Reset the speaker"
+    ]
+  },
+  {
+    "problem": "Speaker keeps restarting",
+    "causes": [
+      "Battery issue",
+      "Power supply instability",
+      "Short circuit",
+      "Firmware crash"
+    ],
+    "questions": [
+      "Does it restart while charging?",
+      "Is the battery swelling or warm?",
+      "Does it happen with no audio playing?"
+    ],
+    "solutions": [
+      "Charge and test the battery",
+      "Inspect power supply circuit",
+      "Check for internal short",
+      "Update or reinstall firmware"
+    ]
+  },
+  {
+    "problem": "Speaker cannot be updated",
+    "causes": [
+      "Weak connection",
+      "App issue",
+      "Insufficient battery",
+      "Corrupted firmware file"
+    ],
+    "questions": [
+      "Is the battery charged enough?",
+      "Are you using the official app?",
+      "Is the device close to the phone during update?"
+    ],
+    "solutions": [
+      "Charge before updating",
+      "Use the official app",
+      "Reconnect the device",
+      "Retry after reinstalling the app"
+    ]
+  },
+  {
+    "problem": "Speaker responds slowly to commands",
+    "causes": [
+      "Low memory",
+      "Software lag",
+      "Weak signal",
+      "Battery depletion"
+    ],
+    "questions": [
+      "Does delay happen only after long use?",
+      "Is the battery level low?",
+      "How far is the source device?"
+    ],
+    "solutions": [
+      "Restart the speaker",
+      "Charge the device",
+      "Move closer to the source",
+      "Update firmware"
+    ]
+  },
+  {
+    "problem": "Speaker audio only comes from one side",
+    "causes": [
+      "One driver failed",
+      "Wiring problem",
+      "Stereo link issue",
+      "Source setting fault"
+    ],
+    "questions": [
+      "Does one channel fail across all sources?",
+      "Have you checked your phone's balance settings?",
+      "Did the speaker get hit or dropped?"
+    ],
+    "solutions": [
+      "Check source balance settings",
+      "Inspect each driver circuit",
+      "Re-solder wiring if needed",
+      "Replace failed driver"
+    ]
+  },
+  {
+    "problem": "Speaker plays but the bass is weak",
+    "causes": [
+      "Damaged woofer",
+      "Blocked bass port",
+      "Low EQ setting",
+      "Cabinet sealing issue"
+    ],
+    "questions": [
+      "Does bass sound weak on all tracks?",
+      "Is the bass port blocked by cloth or dirt?",
+      "Have you checked equalizer settings?"
+    ],
+    "solutions": [
+      "Clear bass port",
+      "Increase bass settings",
+      "Inspect woofer and enclosure",
+      "Repair or replace woofer"
+    ]
+  },
+  {
+    "problem": "Speaker has a sharp clicking sound",
+    "causes": [
+      "Loose cone",
+      "Driver overheating",
+      "Power supply surge",
+      "Component loose inside"
+    ],
+    "questions": [
+      "Does the click happen at startup or playback?",
+      "Is it worse at high volume?",
+      "Did the speaker recently get dropped?"
+    ],
+    "solutions": [
+      "Reduce playback volume",
+      "Inspect internal components",
+      "Secure the cone and cabinet",
+      "Replace overheated parts"
+    ]
+  },
+  {
+    "problem": "Speaker sound quality drops after long use",
+    "causes": [
+      "Overheating",
+      "Dust buildup",
+      "Driver wear",
+      "Battery sag"
+    ],
+    "questions": [
+      "Does quality drop only after long listening sessions?",
+      "Is the speaker very warm?",
+      "Has it been used daily for a long time?"
+    ],
+    "solutions": [
+      "Give it cooling breaks",
+      "Clean the dust from speaker grill",
+      "Service the driver",
+      "Replace aging battery"
+    ]
+  },
+  {
+    "problem": "Speaker cannot play at high volume",
+    "causes": [
+      "Battery nearing empty",
+      "Output driver limit",
+      "Amplifier issue",
+      "Speaker protection mode"
+    ],
+    "questions": [
+      "Does the issue happen only at low battery?",
+      "Does it happen on all songs?",
+      "Is the speaker in thermal protection?"
+    ],
+    "solutions": [
+      "Charge the speaker",
+      "Let it cool down",
+      "Inspect amplifier output",
+      "Disable protection feature if needed"
+    ]
+  },
+  {
+    "problem": "Speaker indicator blinks endlessly",
+    "causes": [
+      "Pairing mode active",
+      "Battery low",
+      "Faulty status LED",
+      "System error"
+    ],
+    "questions": [
+      "Is the speaker in pairing mode?",
+      "Does the blinking continue without input?",
+      "Is the device battery very low?"
+    ],
+    "solutions": [
+      "Exit pairing mode",
+      "Charge the speaker",
+      "Restart the unit",
+      "Check for firmware error"
+    ]
+  },
+  {
+    "problem": "Speaker disconnects when moved",
+    "causes": [
+      "Loose Bluetooth module",
+      "Cable movement",
+      "Weak antenna",
+      "Connection instability"
+    ],
+    "questions": [
+      "Does it disconnect if you pick it up?",
+      "Does it happen with wired use too?",
+      "Does it happen only at certain angles?"
+    ],
+    "solutions": [
+      "Secure the module assembly",
+      "Avoid moving cable connections",
+      "Check antenna routing",
+      "Reconnect and re-test"
+    ]
+  },
+  {
+    "problem": "Speaker turns on only momentarily",
+    "causes": [
+      "Battery not making contact",
+      "Loose power switch",
+      "Shorted charging port",
+      "Control board issue"
+    ],
+    "questions": [
+      "Does it turn on and immediately shut down?",
+      "Is the battery firmly seated?",
+      "Did the charging port get damaged?"
+    ],
+    "solutions": [
+      "Check battery connection",
+      "Repair power switch",
+      "Inspect port for short",
+      "Replace control board"
+    ]
+  },
+  {
+    "problem": "Speaker has no bass response",
+    "causes": [
+      "Bass driver damage",
+      "Port blockage",
+      "EQ disabled",
+      "Cabinet leak"
+    ],
+    "questions": [
+      "Does bass disappear on all tracks?",
+      "Is the bass port dusty or blocked?",
+      "Have you changed the sound profile recently?"
+    ],
+    "solutions": [
+      "Check equalizer profile",
+      "Clean the bass port",
+      "Inspect the woofer",
+      "Seal cabinet leaks"
+    ]
+  },
+  {
+    "problem": "Speaker does not save settings",
+    "causes": [
+      "Resetting power issue",
+      "Storage corruption",
+      "Low battery",
+      "Buggy firmware"
+    ],
+    "questions": [
+      "Do settings reset each time it powers off?",
+      "Is the battery low during configuration?",
+      "Did you recently update firmware?"
+    ],
+    "solutions": [
+      "Charge before changing settings",
+      "Reset to factory defaults",
+      "Update firmware",
+      "Inspect internal memory module"
+    ]
+  },
+  {
+    "problem": "Speaker cannot detect USB input",
+    "causes": [
+      "Bad cable",
+      "Audio jack issue",
+      "Driver not loaded",
+      "Port contamination"
+    ],
+    "questions": [
+      "Does the device recognize any cable?",
+      "Is the input port clean?",
+      "Have you tested with another source device?"
+    ],
+    "solutions": [
+      "Try a known-good cable",
+      "Clean the USB port",
+      "Check jack wiring",
+      "Repair audio input board"
+    ]
+  },
+  {
+    "problem": "Speaker loses sound when charging",
+    "causes": [
+      "Charging noise interference",
+      "Loose power cable",
+      "Low voltage adapter",
+      "Battery fault"
+    ],
+    "questions": [
+      "Does the sound disappear only while plugged in?",
+      "Is the charger original?",
+      "Does the sound return when unplugged?"
+    ],
+    "solutions": [
+      "Use a compatible charger",
+      "Inspect charging cable",
+      "Test with another power source",
+      "Replace weak battery"
+    ]
+  },
+  {
+    "problem": "Speaker freezes during playback",
+    "causes": [
+      "System stuck",
+      "Low memory",
+      "Bad file source",
+      "Firmware issue"
+    ],
+    "questions": [
+      "Does it freeze on one file or all files?",
+      "How long after startup does it happen?",
+      "Does it happen at low battery?"
+    ],
+    "solutions": [
+      "Restart the speaker",
+      "Try another audio source",
+      "Charge the speaker",
+      "Update firmware"
+    ]
+  },
+  {
+    "problem": "Speaker has poor wireless range",
+    "causes": [
+      "Weak antenna",
+      "Interference sources",
+      "Low battery",
+      "Bluetooth module issue"
+    ],
+    "questions": [
+      "Does range worsen at certain locations?",
+      "Is the speaker near a router or microwave?",
+      "Does range improve after charging?"
+    ],
+    "solutions": [
+      "Move away from interference",
+      "Charge the speaker",
+      "Inspect antenna connection",
+      "Replace module if needed"
+    ]
+  },
+  {
+    "problem": "Speaker sound is distorted at low volume",
+    "causes": [
+      "Driver damage",
+      "Amplifier clipping",
+      "Bad source file",
+      "Loose wiring"
+    ],
+    "questions": [
+      "Does it distort only at low volume?",
+      "Does the same happen across multiple files?",
+      "Did the speaker fall recently?"
+    ],
+    "solutions": [
+      "Lower source volume more carefully",
+      "Inspect amplifier stage",
+      "Test another audio file",
+      "Repair wires and cone"
+    ]
+  },
+  {
+    "problem": "Speaker cannot stay awake",
+    "causes": [
+      "Auto power off timer",
+      "Low battery",
+      "Faulty button sensor",
+      "Firmware issue"
+    ],
+    "questions": [
+      "Does it power off without using it?",
+      "Are the auto-off settings enabled?",
+      "Does it shut down at low battery?"
+    ],
+    "solutions": [
+      "Disable auto power off",
+      "Charge battery fully",
+      "Inspect button sensor",
+      "Update firmware"
+    ]
+  },
+  {
+    "problem": "Speaker has a delayed power button response",
+    "causes": [
+      "Sticky switch",
+      "Button contact wear",
+      "Battery voltage drop",
+      "Circuit delay"
+    ],
+    "questions": [
+      "Does the button take long to respond?",
+      "Does it happen when the battery is low?",
+      "Did the switch feel loose recently?"
+    ],
+    "solutions": [
+      "Clean or replace button",
+      "Charge the battery",
+      "Check switch continuity",
+      "Inspect control circuit"
+    ]
+  },
+  {
+    "problem": "Speaker Bluetooth name is not visible",
+    "causes": [
+      "Visibility off",
+      "Bluetooth issue",
+      "Low battery",
+      "Old pairing memory"
+    ],
+    "questions": [
+      "Is the speaker visible to nearby devices?",
+      "Can it still pair via manual selection?",
+      "Is the battery level healthy?"
+    ],
+    "solutions": [
+      "Toggle visibility settings",
+      "Restart Bluetooth module",
+      "Charge before pairing",
+      "Reset the speaker"
+    ]
+  },
+  {
+    "problem": "Speaker has rattling inside the shell",
+    "causes": [
+      "Loose fastening screw",
+      "Loose internal part",
+      "Damaged enclosure",
+      "Vibration contact"
+    ],
+    "questions": [
+      "Does the rattle happen at certain bass levels?",
+      "Have you checked the shell screws?",
+      "Did the speaker get dropped recently?"
+    ],
+    "solutions": [
+      "Tighten assembly screws",
+      "Remove loose internal parts",
+      "Inspect cabinet integrity",
+      "Reseal the enclosure"
+    ]
+  },
+  {
+    "problem": "Speaker creates a high-pitched whistle",
+    "causes": [
+      "Feedback loop",
+      "RF interference",
+      "Bad amp output",
+      "Loose cable ground"
+    ],
+    "questions": [
+      "Does the whistle happen near other electronics?",
+      "Is it worse when volume increases?",
+      "Does it happen with wired input only?"
+    ],
+    "solutions": [
+      "Move away from electronic interference",
+      "Check audio cable grounding",
+      "Lower the volume",
+      "Repair amplifier output"
+    ]
+  },
+  {
+    "problem": "Speaker cannot maintain connection in a car",
+    "causes": [
+      "Signal obstruction",
+      "Interference from vehicle electronics",
+      "Battery drain",
+      "Firmware conflict"
+    ],
+    "questions": [
+      "Does it connect in the house but not in the car?",
+      "Is the phone near a dashboard device?",
+      "Is the speaker battery at a good level?"
+    ],
+    "solutions": [
+      "Reduce interference inside the car",
+      "Move phone closer to speaker",
+      "Charge before use",
+      "Restart both devices"
+    ]
+  },
+  {
+    "problem": "Speaker has weak voice clarity",
+    "causes": [
+      "Mic low sensitivity",
+      "EQ profile",
+      "Dust over mic",
+      "Software processing issue"
+    ],
+    "questions": [
+      "Does clarity drop only during calls?",
+      "Are you speaking directly into the mic?",
+      "Did your voice sound clearer before?"
+    ],
+    "solutions": [
+      "Clean microphone opening",
+      "Adjust EQ or voice settings",
+      "Test another call app",
+      "Replace mic module"
+    ]
+  },
+  {
+    "problem": "Speaker does not read Bluetooth input",
+    "causes": [
+      "Source device compatibility",
+      "Connection broken",
+      "Module not initialized",
+      "Outdated firmware"
+    ],
+    "questions": [
+      "Does the speaker connect but not play?",
+      "Does the same issue happen with another phone?",
+      "Was the speaker updated recently?"
+    ],
+    "solutions": [
+      "Reconnect source device",
+      "Try another device",
+      "Reinitialize pairing",
+      "Update the firmware"
+    ]
+  },
+  {
+    "problem": "Speaker is not recognized by laptop",
+    "causes": [
+      "Bluetooth off",
+      "Driver not installed",
+      "Laptop limited to one driver",
+      "Speaker in pairing failure"
+    ],
+    "questions": [
+      "Does the laptop detect other Bluetooth speakers?",
+      "Is Bluetooth enabled on the laptop?",
+      "Did the laptop recently update?"
+    ],
+    "solutions": [
+      "Enable Bluetooth on the laptop",
+      "Install or repair drivers",
+      "Restart the laptop",
+      "Unpair and re-pair speaker"
+    ]
+  },
+  {
+    "problem": "Speaker feels loose or wobbly",
+    "causes": [
+      "Loose housing",
+      "Damaged rubber feet",
+      "Dropped unit",
+      "Loose internal bracket"
+    ],
+    "questions": [
+      "Does it wobble when placed on a flat surface?",
+      "Have you dropped the speaker recently?",
+      "Do the feet or edges look loose?"
+    ],
+    "solutions": [
+      "Tighten housing screws",
+      "Replace rubber feet",
+      "Inspect internal bracket",
+      "Secure damaged shell parts"
+    ]
+  },
+  {
+    "problem": "Speaker power cable gets hot",
+    "causes": [
+      "Damaged cable insulation",
+      "High current draw",
+      "Poor charger quality",
+      "Shorted port"
+    ],
+    "questions": [
+      "Is the cable warm only while charging?",
+      "Does it smell burnt or look damaged?",
+      "Is the charger original?"
+    ],
+    "solutions": [
+      "Stop using damaged cable",
+      "Use a certified charger",
+      "Inspect port for shorting",
+      "Replace cable immediately"
+    ]
+  },
+  {
+    "problem": "Speaker makes a vibration-like rumble",
+    "causes": [
+      "Loose driver",
+      "Cabinet resonance",
+      "Weak mounting",
+      "Bass overload"
+    ],
+    "questions": [
+      "Does the rumble happen only with low music?",
+      "Is the speaker sitting on a hard surface?",
+      "Have the mountings loosened?"
+    ],
+    "solutions": [
+      "Tighten driver mounting",
+      "Place on a stable surface",
+      "Reduce bass level",
+      "Seal enclosure resonance"
+    ]
+  },
+  {
+    "problem": "Speaker cannot keep a charge",
+    "causes": [
+      "Old battery cell",
+      "Charge cycle wear",
+      "Faulty charging circuit",
+      "Multiple short charges"
+    ],
+    "questions": [
+      "Does the battery percentage drop quickly after charging?",
+      "Is the speaker charged daily for long periods?",
+      "Does charging stop early?"
+    ],
+    "solutions": [
+      "Replace battery pack",
+      "Use proper charging cycles",
+      "Inspect charging board",
+      "Avoid deep discharge"
+    ]
+  },
+  {
+    "problem": "Speaker audio disappears when touched",
+    "causes": [
+      "Loose cable",
+      "Button contact interference",
+      "Ground issue",
+      "Internal short"
+    ],
+    "questions": [
+      "Does sound cut out when you press the shell?",
+      "Does it happen on the buttons or housing?",
+      "Did it start after a drop?"
+    ],
+    "solutions": [
+      "Inspect the shell and wires",
+      "Avoid pressing loose areas",
+      "Secure internal ground points",
+      "Repair shorted component"
+    ]
+  },
+  {
+    "problem": "Speaker is silent after a firmware update",
+    "causes": [
+      "Update interrupted",
+      "Audio profile reset",
+      "Hardware mismatch",
+      "Corrupted firmware file"
+    ],
+    "questions": [
+      "Did it stop after updating?",
+      "Does it still power on normally?",
+      "Is the device still paired?"
+    ],
+    "solutions": [
+      "Retry the firmware update",
+      "Factory reset the speaker",
+      "Check audio profile settings",
+      "Restore from official firmware"
+    ]
+  },
+  {
+    "problem": "Speaker cannot switch modes",
+    "causes": [
+      "Mode button failure",
+      "Firmware bug",
+      "Locked pairing state",
+      "Battery low"
+    ],
+    "questions": [
+      "Does the mode button fail on all functions?",
+      "Is the battery low when switching modes?",
+      "Does it happen after pairing?"
+    ],
+    "solutions": [
+      "Recharge the speaker",
+      "Reset the mode settings",
+      "Clean the mode button",
+      "Update the firmware"
+    ]
+  },
+  {
+    "problem": "Speaker reconnects but audio remains muted",
+    "causes": [
+      "Source mute settings",
+      "Audio channel issue",
+      "Protection mode",
+      "Driver fault"
+    ],
+    "questions": [
+      "Does the device show connected but silent?",
+      "Is the source volume raised?",
+      "Does it happen with all apps?"
+    ],
+    "solutions": [
+      "Unmute the device output",
+      "Check audio channel settings",
+      "Reset the speaker",
+      "Inspect the driver circuit"
+    ]
+  },
+  {
+    "problem": "Speaker produces sharp electrical noise",
+    "causes": [
+      "Power adapter fault",
+      "Internal short",
+      "Loose wire grounding",
+      "Bad capacitor"
+    ],
+    "questions": [
+      "Does it happen while charging or playing?",
+      "Is the adapter original?",
+      "Have any wires been repaired recently?"
+    ],
+    "solutions": [
+      "Replace the adapter",
+      "Inspect grounding points",
+      "Check for short circuit",
+      "Repair or replace capacitor"
+    ]
+  },
+  {
+    "problem": "Speaker remote control is not working",
+    "causes": [
+      "Dead battery",
+      "Blocked IR sensor",
+      "Pairing lost",
+      "Remote damage"
+    ],
+    "questions": [
+      "Does the remote have working batteries?",
+      "Is the speaker sensor clear?",
+      "Did the remote stop responding all at once?"
+    ],
+    "solutions": [
+      "Replace remote batteries",
+      "Clean the IR sensor",
+      "Re-pair the remote",
+      "Replace the remote device"
+    ]
+  },
+  {
+    "problem": "Speaker output is unstable during calls",
+    "causes": [
+      "Mic gain issue",
+      "Bluetooth jitter",
+      "Source phone instability",
+      "Speaker battery fluctuation"
+    ],
+    "questions": [
+      "Does the call quality change with movement?",
+      "Is it worse on one app only?",
+      "Does a full charge help?"
+    ],
+    "solutions": [
+      "Charge the speaker",
+      "Test with another calling app",
+      "Reconnect the call link",
+      "Update the device firmware"
+    ]
+  },
+  {
+    "problem": "Speaker fails to start after long storage",
+    "causes": [
+      "Battery deeply discharged",
+      "Circuit oxidation",
+      "Moisture damage",
+      "Storage temperature issue"
+    ],
+    "questions": [
+      "Has the speaker been stored for months?",
+      "Was it kept in a humid place?",
+      "Did it show any signs of battery swelling?"
+    ],
+    "solutions": [
+      "Charge it slowly with a good adapter",
+      "Let it dry fully",
+      "Clean contacts and ports",
+      "Test or replace the battery"
+    ]
+  },
+  {
+    "problem": "Speaker disconnects when a phone call starts",
+    "causes": [
+      "Bluetooth OS switch",
+      "Call audio prioritization",
+      "Interference",
+      "Pairing conflict"
+    ],
+    "questions": [
+      "Does it disconnect only on calls?",
+      "Does the same happen with any phone?",
+      "Is the speaker near Wi-Fi or router equipment?"
+    ],
+    "solutions": [
+      "Reconnect after call",
+      "Disable call audio switching",
+      "Move away from interference",
+      "Forget and re-pair device"
+    ]
+  },
+  {
+    "problem": "Speaker is stuck in pairing mode",
+    "causes": [
+      "Reset failure",
+      "Button stuck",
+      "Firmware bug",
+      "Source device gap"
+    ],
+    "questions": [
+      "Does it blink continuously with no device found?",
+      "Did it enter pairing mode by mistake?",
+      "Have you tried resetting it?"
+    ],
+    "solutions": [
+      "Power cycle the speaker",
+      "Hold reset button longer",
+      "Check button stuck issue",
+      "Update firmware after reconnecting"
+    ]
+  },
+  {
+    "problem": "Speaker charger indicator stays red",
+    "causes": [
+      "Slow charging state",
+      "Bad cable",
+      "Battery nearing end of life",
+      "Port contamination"
+    ],
+    "questions": [
+      "Does it eventually turn green after a long time?",
+      "Has it stopped charging completely?",
+      "Is the cable or port damaged?"
+    ],
+    "solutions": [
+      "Try another cable",
+      "Clean the port carefully",
+      "Wait longer for charging",
+      "Replace aging battery"
+    ]
+  },
+  {
+    "problem": "Speaker cannot be controlled from app",
+    "causes": [
+      "App permissions missing",
+      "Bluetooth lag",
+      "Device disconnected",
+      "App version issue"
+    ],
+    "questions": [
+      "Does the app connect but not respond?",
+      "Is the speaker still discovered?",
+      "Was the app recently updated?"
+    ],
+    "solutions": [
+      "Regrant app permissions",
+      "Restart the app and speaker",
+      "Reconnect via Bluetooth",
+      "Update or reinstall the app"
+    ]
+  },
+  {
+    "problem": "Speaker voice assistant does not respond",
+    "causes": [
+      "Mic muted",
+      "Assistant feature disabled",
+      "Network issue",
+      "Speaker mic fault"
+    ],
+    "questions": [
+      "Does the voice assistant work on other devices?",
+      "Is the mic enabled for the assistant?",
+      "Is the device connected to Internet?"
+    ],
+    "solutions": [
+      "Enable assistant features",
+      "Check microphone permissions",
+      "Reconnect to network",
+      "Repair or replace mic"
+    ]
+  },
+  {
+    "problem": "Speaker Bluetooth list is not updating",
+    "causes": [
+      "Cache issue",
+      "Interference",
+      "Outdated firmware",
+      "Device visibility disabled"
+    ],
+    "questions": [
+      "Does the list refresh after restarting?",
+      "Are other nearby devices visible?",
+      "Is visibility enabled on the speaker?"
+    ],
+    "solutions": [
+      "Restart the speaker",
+      "Reset device visibility",
+      "Update firmware",
+      "Clear the device cache"
+    ]
+  },
+  {
+    "problem": "Speaker has a constant low battery warning",
+    "causes": [
+      "Bad battery calibration",
+      "Charging cycle fault",
+      "Battery wear",
+      "False battery sensor reading"
+    ],
+    "questions": [
+      "Does the battery level drop quickly even after charging?",
+      "Is the speaker charged from a known-good adapter?",
+      "Did the warning start recently?"
+    ],
+    "solutions": [
+      "Calibrate the battery gauge",
+      "Replace the battery",
+      "Check adapter and charging port",
+      "Reset the speaker"
+    ]
+  },
+  {
+    "problem": "Speaker audio is muffled after a drop",
+    "causes": [
+      "Cone deformation",
+      "Internal solder crack",
+      "Dust or debris in cone",
+      "Dust cap damage"
+    ],
+    "questions": [
+      "Did the speaker fall or hit a surface?",
+      "Is the sound reduced on all audio sources?",
+      "Do you hear rattling or buzzing too?"
+    ],
+    "solutions": [
+      "Inspect cone and dust cap",
+      "Check for solder cracks",
+      "Clean the speaker cone",
+      "Replace damaged driver"
+    ]
+  },
+  {
+    "problem": "Speaker finds the device but will not connect",
+    "causes": [
+      "Previous pairing issue",
+      "Weak signal",
+      "Outdated firmware",
+      "Software lockout"
+    ],
+    "questions": [
+      "Does it show in the list but fail on connect?",
+      "Is the source too far away?",
+      "Have you tried forgetting the device first?"
+    ],
+    "solutions": [
+      "Forget and repair the device",
+      "Move closer and retry",
+      "Update firmware",
+      "Reset pairing memory"
+    ]
+  },
+  {
+    "problem": "Speaker enters standby too quickly",
+    "causes": [
+      "Auto-off timer",
+      "Low battery",
+      "Sensor issue",
+      "Firmware bug"
+    ],
+    "questions": [
+      "Does it only sleep after inactivity?",
+      "Is the battery low when it sleeps?",
+      "Did the behavior start after an update?"
+    ],
+    "solutions": [
+      "Turn off auto-sleep",
+      "Charge the speaker",
+      "Inspect motion or sensor inputs",
+      "Update firmware"
+    ]
+  },
+  {
+    "problem": "Speaker randomly switches off while playing",
+    "causes": [
+      "Thermal protection",
+      "Low voltage",
+      "Button fault",
+      "Faulty battery connector"
+    ],
+    "questions": [
+      "Does it shut off at high volume?",
+      "Does it happen while charging?",
+      "Is the battery connector secure?"
+    ],
+    "solutions": [
+      "Let the speaker cool down",
+      "Charge before use",
+      "Check the battery connector",
+      "Replace battery or button"
+    ]
+  },
+  {
+    "problem": "Speaker does not respond to Bluetooth disconnect action",
+    "causes": [
+      "Bluetooth stack issue",
+      "Pairing stale state",
+      "Software glitch",
+      "Weak signal"
+    ],
+    "questions": [
+      "Does disconnect fail even after turning Bluetooth off?",
+      "Does the speaker still appear in list?",
+      "Is the signal stronger or weaker nearby?"
+    ],
+    "solutions": [
+      "Restart the source device",
+      "Forget and reconnect the speaker",
+      "Move closer to source",
+      "Reset the speaker"
+    ]
+  },
+  {
+    "problem": "Speaker output is very tinny",
+    "causes": [
+      "Treble boosted too high",
+      "Muffled woofer",
+      "EQ issue",
+      "Driver damaged"
+    ],
+    "questions": [
+      "Does the sound feel overly sharp?",
+      "Have you changed the sound preset recently?",
+      "Does bass feel weak too?"
+    ],
+    "solutions": [
+      "Reset EQ presets",
+      "Inspect woofer condition",
+      "Reduce treble boost",
+      "Repair or replace driver"
+    ]
+  },
+  {
+    "problem": "Speaker volume cannot be adjusted smoothly",
+    "causes": [
+      "Volume wheel fault",
+      "Dirty control surface",
+      "Software setting conflict",
+      "Loose encoder"
+    ],
+    "questions": [
+      "Does the volume jump instead of changing smoothly?",
+      "Is the control physically loose?",
+      "Does it happen with app control too?"
+    ],
+    "solutions": [
+      "Clean the control surface",
+      "Repair or replace volume wheel",
+      "Reconfigure the app settings",
+      "Reset the device"
+    ]
+  },
+  {
+    "problem": "Speaker does not read certain audio files",
+    "causes": [
+      "Unsupported format",
+      "Corrupted file",
+      "Source app issue",
+      "Audio codec mismatch"
+    ],
+    "questions": [
+      "What file type is failing to play?",
+      "Does the same issue happen on other files?",
+      "Is the source app up to date?"
+    ],
+    "solutions": [
+      "Convert the file to a supported format",
+      "Try a different audio app",
+      "Check the file integrity",
+      "Update firmware or app"
+    ]
+  },
+  {
+    "problem": "Speaker has delayed startup sounds",
+    "causes": [
+      "Battery weak",
+      "Boot loading issue",
+      "Firmware glitch",
+      "Control board delay"
+    ],
+    "questions": [
+      "Does it take a while before the speaker starts?",
+      "Does it happen every time you power on?",
+      "Is the battery almost empty?"
+    ],
+    "solutions": [
+      "Charge before startup",
+      "Restart the device",
+      "Update firmware",
+      "Service the control board"
+    ]
+  },
+  {
+    "problem": "Speaker is stuck in mute mode",
+    "causes": [
+      "Mute setting persisted",
+      "Button lock",
+      "App issue",
+      "Faulty control board"
+    ],
+    "questions": [
+      "Does the speaker stay silent even when volume is raised?",
+      "Does the app indicate mute state?",
+      "Did it happen after a software update?"
+    ],
+    "solutions": [
+      "Toggle mute off",
+      "Reset the speaker",
+      "Check app audio output",
+      "Repair control board"
+    ]
+  },
+  {
+    "problem": "Speaker cannot detect an audio cable",
+    "causes": [
+      "Damaged jack",
+      "Dust in port",
+      "Loose connector",
+      "Bad cable compatibility"
+    ],
+    "questions": [
+      "Does the cable fit snugly?",
+      "Is the port free of dust or lint?",
+      "Does it work with another cable?"
+    ],
+    "solutions": [
+      "Clean the connector port",
+      "Replace the cable",
+      "Check or repair the jack",
+      "Use a compatible adapter"
+    ]
+  },
+  {
+    "problem": "Speaker loses sound when the device is moved",
+    "causes": [
+      "Loose cable",
+      "Internal harness movement",
+      "Sensor issue",
+      "Battery disconnection"
+    ],
+    "questions": [
+      "Does the sound cut out when you move the speaker?",
+      "Does it happen with a wired source too?",
+      "Did the unit drop recently?"
+    ],
+    "solutions": [
+      "Secure internal harnesses",
+      "Replace damaged cable",
+      "Check battery terminals",
+      "Re-seat internal connections"
+    ]
+  },
+  {
+    "problem": "Speaker keeps showing the wrong charging status",
+    "causes": [
+      "Battery sensor fault",
+      "Charging board issue",
+      "Corrosion on contacts",
+      "Firmware bug"
+    ],
+    "questions": [
+      "Does the battery indicator jump around?",
+      "Does the speaker charge normally despite the wrong display?",
+      "Are the charging contacts clean?"
+    ],
+    "solutions": [
+      "Clean charging contacts",
+      "Replace battery sensor",
+      "Inspect charging board",
+      "Update or reset firmware"
+    ]
+  },
+  {
+    "problem": "Speaker is too sensitive to input volume",
+    "causes": [
+      "Gain setting high",
+      "Driver issue",
+      "Amplifier clipping",
+      "Source audio boost"
+    ],
+    "questions": [
+      "Does a small volume increase make it very loud?",
+      "Is the equalizer turned up?",
+      "Does it happen on all input sources?"
+    ],
+    "solutions": [
+      "Reduce gain or EQ settings",
+      "Test with another source",
+      "Inspect amplifier output",
+      "Repair or replace driver"
+    ]
+  },
+  {
+    "problem": "Speaker has weak stereo separation",
+    "causes": [
+      "Channel imbalance",
+      "Driver mismatch",
+      "Wiring issue",
+      "Source audio mix"
+    ],
+    "questions": [
+      "Does the sound seem narrowed to one side?",
+      "Is the source file stereo encoded?",
+      "Did the speaker recently move or fall?"
+    ],
+    "solutions": [
+      "Check stereo balance settings",
+      "Inspect channel wiring",
+      "Test another source file",
+      "Repair or replace weak driver"
+    ]
+  },
+  {
+    "problem": "Speaker vibrates during idle",
+    "causes": [
+      "Loose cabinet panel",
+      "Resonance from stand",
+      "Driver buzzing",
+      "Bass boost too high"
+    ],
+    "questions": [
+      "Does the vibration happen even with no music?",
+      "Is it worse on a hard surface?",
+      "Does it start when bass is boosted?"
+    ],
+    "solutions": [
+      "Tighten cabinet panels",
+      "Reduce bass boost",
+      "Inspect driver mount",
+      "Use a stable surface"
+    ]
+  },
+  {
+    "problem": "Speaker exhibits ghost audio after use",
+    "causes": [
+      "Residual digital signal",
+      "Delayed audio buffer",
+      "Firmware glitch",
+      "Source device issue"
+    ],
+    "questions": [
+      "Does the ghost sound happen after playback ends?",
+      "Is it more noticeable on video apps?",
+      "Did the speaker recently update?"
+    ],
+    "solutions": [
+      "Restart the connected device",
+      "Reset the speaker audio profile",
+      "Update firmware",
+      "Test a different app or source"
+    ]
+  },
+  {
+    "problem": "Speaker loses touch sensitivity",
+    "causes": [
+      "Dirty touch panel",
+      "Moisture on surface",
+      "Touch controller fault",
+      "Low battery voltage"
+    ],
+    "questions": [
+      "Does the touch area feel sticky or wet?",
+      "Do taps respond inconsistently?",
+      "Is the battery low at the same time?"
+    ],
+    "solutions": [
+      "Clean the touch panel",
+      "Dry the speaker surface",
+      "Check panel controller",
+      "Charge the battery"
+    ]
+  },
+  {
+    "problem": "Speaker keeps trying to pair automatically",
+    "causes": [
+      "Visible pairing mode",
+      "Multiple devices nearby",
+      "Firmware loop",
+      "Stale connection data"
+    ],
+    "questions": [
+      "Does it keep entering pairing mode repeatedly?",
+      "Are several devices nearby?",
+      "Was it recently reset or updated?"
+    ],
+    "solutions": [
+      "Turn off auto-pairing",
+      "Forget unused devices",
+      "Restart the speaker",
+      "Update firmware"
+    ]
+  },
+  {
+    "problem": "Speaker fails after a long charge cycle",
+    "causes": [
+      "Overcharge protection issue",
+      "Battery degradation",
+      "Charging board fault",
+      "Power supply problem"
+    ],
+    "questions": [
+      "Did the speaker stop working after charging for hours?",
+      "Is the battery swelling or very warm?",
+      "Are you using a certified charger?"
+    ],
+    "solutions": [
+      "Stop overcharging and test again",
+      "Replace the battery if aged",
+      "Inspect charging board",
+      "Use a proper charger"
+    ]
+  },
+  {
+    "problem": "Speaker cannot maintain audio after a software reset",
+    "causes": [
+      "Default profile issue",
+      "Missing driver config",
+      "Firmware partial reset",
+      "Device compatibility glitch"
+    ],
+    "questions": [
+      "Did audio return after a factory reset?",
+      "Does it work only with a specific source?",
+      "Was the reset completed cleanly?"
+    ],
+    "solutions": [
+      "Reconfigure preferred audio settings",
+      "Retry firmware installation",
+      "Re-pair the device",
+      "Check source compatibility"
+    ]
+  },
+  {
+    "problem": "Speaker receives power but stays offline",
+    "causes": [
+      "System lockup",
+      "Bootloader fault",
+      "Corrupted firmware",
+      "Power rail instability"
+    ],
+    "questions": [
+      "Does it show any light or display activity at all?",
+      "Was the power source stable during startup?",
+      "Did the speaker recently update or reset?"
+    ],
+    "solutions": [
+      "Restart with a stable charger",
+      "Force a reset sequence",
+      "Reinstall the official firmware",
+      "Inspect power rail and boot board"
+    ]
   }
-  
 ]
