@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Sound of Heart</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+    <nav class="shop-nav">
+        <a href="index.html" class="logo">Sound of <span>Heart</span></a>
+        <div class="shop-nav-actions">
+            <span id="userName">Guest</span>
+            <a href="product.html" class="nav-button">Continue Shopping</a>
+            <a href="index.html" class="nav-button">Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="shop-main cart-main">
+        <header class="shop-heading">
+            <p class="section-tag">Your Selection</p>
+            <h1>Your Cart</h1>
+            <p>Review your products before placing your order.</p>
+        </header>
+
+        <section class="cart-layout">
+            <div id="cartItems" class="cart-items"></div>
+            <aside class="cart-summary">
+                <p class="section-tag">Order Summary</p>
+                <h2>Total</h2>
+                <strong id="cartTotal">₹0</strong>
+                <button type="button" id="buyNowButton" class="buy-button">Buy Now</button>
+                <p id="orderMessage" class="order-message" role="status"></p>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="shop-footer">
+        <strong>Made in India</strong>
+        <p>Thoughtful audio products, honest service, and support from the Sound of Heart team.</p>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+
+</html>

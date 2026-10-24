@@ -61,7 +61,45 @@ db.exec(`
     )
 `);
 
-app.use(express.json());
+db.exec(`
+    CREATE TABLE IF NOT EXISTS seller_applications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        gpay_number TEXT NOT NULL,
+        whatsapp_number TEXT NOT NULL,
+        password TEXT NOT NULL,
+        plan TEXT NOT NULL,
+        payment_evidence TEXT NOT NULL,
+        review_token TEXT NOT NULL UNIQUE,
+        status TEXT NOT NULL DEFAULT 'Pending',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+`);
+
+db.exec(`
+    CREATE TABLE IF NOT EXISTS seller_sessions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        application_id INTEGER NOT NULL,
+        token TEXT NOT NULL UNIQUE,
+        expires_at INTEGER NOT NULL,
+        FOREIGN KEY (application_id) REFERENCES seller_applications(id) ON DELETE CASCADE
+    )
+`);
+
+db.exec(`
+    CREATE TABLE IF NOT EXISTS seller_products (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        application_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        price REAL NOT NULL,
+        details TEXT NOT NULL,
+        photo TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (application_id) REFERENCES seller_applications(id) ON DELETE CASCADE
+    )
+`);
+
+app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -169,6 +207,69 @@ function requireAuth(req, res, next) {
     req.user = user;
 
     next();
+}
+
+function getSellerFromRequest(req) {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.substring(7)
+        : null;
+
+    if (!token) {
+        return null;
+    }
+
+    return db.prepare(`
+        SELECT seller_sessions.application_id, seller_applications.name
+        FROM seller_sessions
+        INNER JOIN seller_applications
+            ON seller_applications.id = seller_sessions.application_id
+        WHERE seller_sessions.token = ?
+        AND seller_sessions.expires_at > ?
+        AND seller_applications.status = 'Approved'
+    `).get(token, Date.now());
+}
+
+function requireSeller(req, res, next) {
+    const seller = getSellerFromRequest(req);
+
+    if (!seller) {
+        return res.status(401).json({
+            success: false,
+            message: "Your seller registration is not approved or your login expired."
+        });
+    }
+
+    req.seller = seller;
+    next();
+}
+
+async function notifySellerReview(application) {
+    const webhookUrl = process.env.WHATSAPP_WEBHOOK_URL;
+
+    if (!webhookUrl) {
+        return false;
+    }
+
+    const baseUrl = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
+    const payload = {
+        to: "+919952433437",
+        message: `New seller application from ${application.name}. Plan: ${application.plan}.`,
+        approveUrl: `${baseUrl}/api/seller/applications/${application.id}/approve?token=${application.review_token}`,
+        rejectUrl: `${baseUrl}/api/seller/applications/${application.id}/reject?token=${application.review_token}`
+    };
+
+    try {
+        const response = await fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+        return response.ok;
+    } catch (error) {
+        console.error("Seller WhatsApp notification error:", error);
+        return false;
+    }
 }
 
 app.get("/", (req, res) => {
@@ -750,6 +851,147 @@ app.post(
         });
     }
 );
+
+const sellerPlans = {
+    weekly: { label: "Weekly Plan", maxPrice: 200, maxProducts: 20, cost: "20 rupees" },
+    monthly: { label: "Monthly Plan", maxPrice: 500, maxProducts: 50, cost: "200 rupees" },
+    annually: { label: "Annually Plan", maxPrice: 500, maxProducts: 100, cost: "infinity" }
+};
+
+app.post("/api/seller/applications", async (req, res) => {
+    try {
+        const {
+            name,
+            gpayNumber,
+            whatsappNumber,
+            password,
+            confirmPassword,
+            plan,
+            paymentEvidence
+        } = req.body;
+
+        if (!name || !gpayNumber || !whatsappNumber || !password || !confirmPassword || !plan || !paymentEvidence) {
+            return res.status(400).json({ success: false, message: "Please complete every seller registration field." });
+        }
+
+        if (!sellerPlans[plan]) {
+            return res.status(400).json({ success: false, message: "Please choose a valid seller plan." });
+        }
+
+        if (password.length < 8 || password !== confirmPassword) {
+            return res.status(400).json({ success: false, message: "Passwords must match and contain at least 8 characters." });
+        }
+
+        if (!paymentEvidence.startsWith("data:image/")) {
+            return res.status(400).json({ success: false, message: "Please upload a payment image." });
+        }
+
+        const reviewToken = crypto.randomBytes(32).toString("hex");
+        const hashedPassword = await bcrypt.hash(password, 12);
+        const result = db.prepare(`
+            INSERT INTO seller_applications
+                (name, gpay_number, whatsapp_number, password, plan, payment_evidence, review_token)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `).run(
+            name.trim(),
+            gpayNumber.trim(),
+            whatsappNumber.trim(),
+            hashedPassword,
+            plan,
+            paymentEvidence,
+            reviewToken
+        );
+
+        const application = db.prepare("SELECT id, name, plan, review_token FROM seller_applications WHERE id = ?")
+            .get(result.lastInsertRowid);
+        const whatsappSent = await notifySellerReview(application);
+
+        return res.status(201).json({
+            success: true,
+            applicationId: application.id,
+            whatsappSent,
+            message: whatsappSent
+                ? "Payment evidence sent for WhatsApp review."
+                : "Registration saved. Configure WHATSAPP_WEBHOOK_URL to send the accept/reject request to WhatsApp."
+        });
+    } catch (error) {
+        console.error("Seller application error:", error);
+        return res.status(500).json({ success: false, message: "Unable to save seller registration." });
+    }
+});
+
+function reviewSellerApplication(req, res, status) {
+    const application = db.prepare(`
+        SELECT id, name
+        FROM seller_applications
+        WHERE id = ? AND review_token = ?
+    `).get(Number(req.params.id), req.query.token);
+
+    if (!application) {
+        return res.status(404).send("Seller application not found.");
+    }
+
+    db.prepare("UPDATE seller_applications SET status = ? WHERE id = ?")
+        .run(status, application.id);
+
+    return res.send(`Seller registration for ${application.name} was ${status.toLowerCase()}.`);
+}
+
+app.get("/api/seller/applications/:id/approve", (req, res) =>
+    reviewSellerApplication(req, res, "Approved"));
+
+app.get("/api/seller/applications/:id/reject", (req, res) =>
+    reviewSellerApplication(req, res, "Rejected"));
+
+app.post("/api/seller/login", async (req, res) => {
+    const { name, password } = req.body;
+    const application = db.prepare(`
+        SELECT * FROM seller_applications
+        WHERE lower(name) = lower(?)
+        AND status = 'Approved'
+        ORDER BY id DESC
+        LIMIT 1
+    `).get(name?.trim(),);
+
+    if (!application || !(await bcrypt.compare(password || "", application.password))) {
+        return res.status(401).json({ success: false, message: "Seller name or password is incorrect, or registration is not approved yet." });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+    db.prepare("INSERT INTO seller_sessions (application_id, token, expires_at) VALUES (?, ?, ?)")
+        .run(application.id, token, Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+    return res.json({ success: true, token, name: application.name });
+});
+
+app.get("/api/products", (req, res) => {
+    const products = db.prepare(`
+        SELECT id, name, price, details, photo
+        FROM seller_products
+        ORDER BY id DESC
+    `).all();
+
+    return res.json({ success: true, products });
+});
+
+app.post("/api/seller/products", requireSeller, (req, res) => {
+    const { name, price, details, photo } = req.body;
+    const numericPrice = Number(price);
+
+    if (!name?.trim() || !Number.isFinite(numericPrice) || numericPrice < 0 || !details?.trim() || !photo?.startsWith("data:image/")) {
+        return res.status(400).json({ success: false, message: "Please provide a product name, valid price, details, and photo." });
+    }
+
+    const result = db.prepare(`
+        INSERT INTO seller_products (application_id, name, price, details, photo)
+        VALUES (?, ?, ?, ?, ?)
+    `).run(req.seller.application_id, name.trim(), numericPrice, details.trim(), photo);
+
+    const product = db.prepare("SELECT id, name, price, details, photo FROM seller_products WHERE id = ?")
+        .get(result.lastInsertRowid);
+
+    return res.status(201).json({ success: true, product, message: "Product added successfully." });
+});
 
 app.listen(PORT, "0.0.0.0", () => {
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product Registration | Sound of Heart</title>
+    <link rel="stylesheet" href="seller.css">
+</head>
+<body>
+    <nav class="seller-nav">
+        <a href="index.html" class="logo">Sound of <span>Heart</span></a>
+        <a href="index.html">Back to Home</a>
+    </nav>
+
+    <main class="seller-main">
+        <header class="seller-heading">
+            <p class="section-tag">Seller Registration</p>
+            <h1>Start Selling With Us</h1>
+            <p>Enter your details, then choose a plan for your product store.</p>
+        </header>
+
+        <section class="seller-card">
+            <form id="sellerRegistrationForm" class="seller-form">
+                <div class="field">
+                    <label for="sellerName">User Name</label>
+                    <input id="sellerName" name="name" required autocomplete="name">
+                </div>
+                <div class="field">
+                    <label for="gpayNumber">GPay Number</label>
+                    <input id="gpayNumber" name="gpayNumber" required placeholder="Your GPay number">
+                </div>
+                <div class="field">
+                    <label for="whatsappNumber">WhatsApp Number</label>
+                    <input id="whatsappNumber" name="whatsappNumber" required placeholder="Your WhatsApp number">
+                </div>
+                <div class="field">
+                    <label for="sellerPassword">Password</label>
+                    <input id="sellerPassword" name="password" type="password" minlength="8" required>
+                </div>
+                <div class="field">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input id="confirmPassword" name="confirmPassword" type="password" minlength="8" required>
+                </div>
+                <button class="primary-button" type="submit">Upgrade</button>
+                <p id="registrationMessage" class="form-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="seller-footer"><strong>Made in India</strong> | Sound of Heart seller support</footer>
+    <script src="add_product_registor.js"></script>
+</body>
+</html>

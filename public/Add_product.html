@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product | Sound of Heart</title>
+    <link rel="stylesheet" href="seller.css">
+</head>
+<body>
+    <nav class="seller-nav">
+        <a href="index.html" class="logo">Sound of <span>Heart</span></a>
+        <span id="sellerName"></span>
+        <a href="product.html">View Products</a>
+    </nav>
+    <main class="seller-main">
+        <header class="seller-heading">
+            <p class="section-tag">Seller Dashboard</p>
+            <h1>Add a Product</h1>
+            <p>Add a product to the Sound of Heart public catalog.</p>
+        </header>
+        <section class="seller-card">
+            <form id="productForm" class="seller-form">
+                <div class="field">
+                    <label for="productName">Product Name</label>
+                    <input id="productName" required>
+                </div>
+                <div class="field">
+                    <label for="productPrice">Product Price</label>
+                    <input id="productPrice" type="number" min="0" step="0.01" required>
+                </div>
+                <div class="field">
+                    <label for="productDetails">Product Details</label>
+                    <textarea id="productDetails" required></textarea>
+                </div>
+                <div class="field">
+                    <label for="productPhoto">Product Photo</label>
+                    <input id="productPhoto" type="file" accept="image/*" required>
+                </div>
+                <button class="primary-button" type="submit">Add Product</button>
+                <p id="productMessage" class="form-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+    <footer class="seller-footer"><strong>Made in India</strong> | Sound of Heart seller support</footer>
+    <script src="Add_product.js"></script>
+</body>
+</html>

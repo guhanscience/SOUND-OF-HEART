@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Evidence | Sound of Heart</title>
+    <link rel="stylesheet" href="seller.css">
+</head>
+<body>
+    <nav class="seller-nav">
+        <a href="index.html" class="logo">Sound of <span>Heart</span></a>
+        <a href="plan.html">Back to Plans</a>
+    </nav>
+
+    <main class="seller-main">
+        <header class="seller-heading">
+            <p class="section-tag">Payment Verification</p>
+            <h1>Upload Payment Evidence</h1>
+            <p>Pay your selected plan to the GPay number below and upload the payment photo.</p>
+        </header>
+
+        <section class="seller-card">
+            <p class="payment-number">GPay to: +919952433437</p>
+            <form id="paymentForm" class="seller-form">
+                <div class="field">
+                    <label for="paymentPhoto">Payment Photo</label>
+                    <input id="paymentPhoto" type="file" accept="image/*" required>
+                </div>
+                <button class="primary-button" type="submit">Submit</button>
+                <p id="paymentMessage" class="form-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="seller-footer"><strong>Made in India</strong> | WhatsApp review: +919952433437</footer>
+    <script src="pay_evidence.js"></script>
+</body>
+</html>

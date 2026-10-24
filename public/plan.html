@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose a Plan | Sound of Heart</title>
+    <link rel="stylesheet" href="seller.css">
+</head>
+<body>
+    <nav class="seller-nav">
+        <a href="index.html" class="logo">Sound of <span>Heart</span></a>
+        <a href="add_product_registor.html">Back</a>
+    </nav>
+
+    <main class="seller-main">
+        <header class="seller-heading">
+            <p class="section-tag">Choose Your Plan</p>
+            <h1>Upgrade Your Store</h1>
+            <p>Pick the plan that matches the products you want to sell.</p>
+        </header>
+
+        <section class="plans-grid">
+            <article class="plan-card">
+                <h2>Weekly Plan</h2>
+                <ul>
+                    <li>Sell price: below 200 rupees</li>
+                    <li>Sell no. of product: below 20</li>
+                    <li>Plan Cost: 20 rupees</li>
+                </ul>
+                <button class="plan-button" data-plan="weekly">Upgrade</button>
+            </article>
+            <article class="plan-card">
+                <h2>Monthly Plan</h2>
+                <ul>
+                    <li>Sell price: below 500 rupees</li>
+                    <li>Sell no. of product: below 50</li>
+                    <li>Plan Cost: 200 rupees</li>
+                </ul>
+                <button class="plan-button" data-plan="monthly">Upgrade</button>
+            </article>
+            <article class="plan-card">
+                <h2>Annually Plan</h2>
+                <ul>
+                    <li>Sell price: below 500 rupees</li>
+                    <li>Sell no. of product: below 100</li>
+                    <li>Plan Cost: infinity</li>
+                </ul>
+                <button class="plan-button" data-plan="annually">Upgrade</button>
+            </article>
+        </section>
+        <p id="planMessage" class="form-message" role="status"></p>
+    </main>
+
+    <footer class="seller-footer"><strong>Made in India</strong> | Sound of Heart seller support</footer>
+    <script src="plan.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #2a2a2a;
+    --text: #f0f0f0;
+    --muted: #9a9a9a;
+    --accent: #d4a373;
+    --accent-hover: #e0b585;
+    --success: #7ee787;
+    --error: #ff8f8f;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.seller-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 5%;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--text);
+    font-family: Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span,
+.section-tag {
+    color: var(--accent);
+}
+
+.seller-nav a:last-child,
+.back-link {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.seller-main {
+    width: min(900px, 100%);
+    margin: 0 auto;
+    padding: 65px 24px;
+}
+
+.seller-heading {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.section-tag {
+    font-size: 0.78rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.seller-heading h1 {
+    margin: 8px 0;
+    font-family: Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+}
+
+.seller-heading p:last-child,
+.field small {
+    color: var(--muted);
+}
+
+.seller-card,
+.plan-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+}
+
+.seller-form {
+    display: grid;
+    gap: 18px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.field input,
+.field textarea,
+.field select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    background: #0b0b0b;
+    color: var(--text);
+    font: inherit;
+}
+
+.field textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.primary-button,
+.plan-button {
+    border: 0;
+    border-radius: 8px;
+    padding: 13px 18px;
+    background: var(--accent);
+    color: #0a0a0a;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+}
+
+.primary-button:hover,
+.plan-button:hover {
+    background: var(--accent-hover);
+}
+
+.form-message {
+    min-height: 25px;
+    text-align: center;
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.plan-card h2 {
+    margin-bottom: 20px;
+    font-family: Georgia, serif;
+}
+
+.plan-card ul {
+    min-height: 105px;
+    margin: 0 0 25px 18px;
+    color: var(--muted);
+}
+
+.plan-card li + li {
+    margin-top: 6px;
+}
+
+.plan-button {
+    width: 100%;
+}
+
+.payment-number {
+    margin: 15px 0 25px;
+    padding: 14px;
+    border-left: 3px solid var(--accent);
+    background: #1b1814;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.seller-footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    text-align: center;
+}
+
+.seller-footer strong {
+    color: var(--accent);
+}
+
+@media (max-width: 760px) {
+    .seller-nav {
+        gap: 12px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+}

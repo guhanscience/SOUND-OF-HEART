@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Login | Sound of Heart</title>
+    <link rel="stylesheet" href="seller.css">
+</head>
+<body>
+    <nav class="seller-nav">
+        <a href="index.html" class="logo">Sound of <span>Heart</span></a>
+        <a href="index.html">Back to Home</a>
+    </nav>
+    <main class="seller-main">
+        <header class="seller-heading">
+            <p class="section-tag">Approved Sellers</p>
+            <h1>Seller Login</h1>
+            <p>Use the name and password from your approved registration.</p>
+        </header>
+        <section class="seller-card">
+            <form id="sellerLoginForm" class="seller-form">
+                <div class="field">
+                    <label for="loginName">User Name</label>
+                    <input id="loginName" required>
+                </div>
+                <div class="field">
+                    <label for="loginPassword">Password</label>
+                    <input id="loginPassword" type="password" required>
+                </div>
+                <button class="primary-button" type="submit">Login</button>
+                <p id="loginMessage" class="form-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+    <footer class="seller-footer"><strong>Made in India</strong> | Sound of Heart seller support</footer>
+    <script src="add_product_login.js"></script>
+</body>
+</html>
