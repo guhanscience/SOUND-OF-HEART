@@ -1,3 +1,10 @@
+const loginCard = document.querySelector('.login-card');
+loginCard?.addEventListener('pointermove', (event) => {
+    const rect = loginCard.getBoundingClientRect();
+    loginCard.style.setProperty('--glow-x', `${event.clientX - rect.left}px`);
+    loginCard.style.setProperty('--glow-y', `${event.clientY - rect.top}px`);
+});
+
 const form = document.getElementById("loginForm");
 const message = document.getElementById("loginMessage");
 

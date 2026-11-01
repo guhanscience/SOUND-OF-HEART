@@ -18,6 +18,9 @@
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
+    animation: sellerPageEntrance .65s ease-out both;
+    background: radial-gradient(circle at 50% 0%, rgba(212,163,115,.08), transparent 26%), var(--bg);
     background: var(--bg);
     color: var(--text);
     font-family: Arial, sans-serif;
@@ -87,6 +90,23 @@ body {
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 28px;
+    position: relative;
+    overflow: hidden;
+    animation: sellerCardEntrance .8s cubic-bezier(.2,.75,.2,1) both;
+    box-shadow: 0 24px 70px rgba(0,0,0,.28);
+}
+
+.seller-card::before {
+    content: "";
+    position: absolute;
+    left: var(--seller-glow-x, 50%);
+    top: var(--seller-glow-y, 50%);
+    width: 220px;
+    height: 220px;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(212,163,115,.09), transparent 70%);
 }
 
 .seller-form {
@@ -127,11 +147,27 @@ body {
     cursor: pointer;
     font: inherit;
     font-weight: bold;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .primary-button:hover,
 .plan-button:hover {
     background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(212,163,115,.18);
+}
+
+.field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(212,163,115,.08);
+    outline: none;
+}
+
+@keyframes sellerPageEntrance { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sellerCardEntrance { from { opacity: 0; transform: translateY(28px) scale(.97); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
 .form-message {

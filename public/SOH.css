@@ -427,6 +427,67 @@ body::before {
     50% { transform: translateY(-18px) rotate(8deg); }
 }
 
+/* Unique motion layer */
+body {
+    --cursor-x: 50vw;
+    --cursor-y: 30vh;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    left: var(--cursor-x);
+    top: var(--cursor-y);
+    width: 260px;
+    height: 260px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 998;
+    background: radial-gradient(circle, rgba(212,163,115,.055), transparent 68%);
+}
+
+.scroll-progress {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 3px;
+    width: var(--scroll-progress, 0%);
+    z-index: 1000;
+    background: linear-gradient(90deg, var(--accent-hover), var(--accent));
+    box-shadow: 0 0 18px var(--accent);
+}
+
+.hero-content {
+    transform-style: preserve-3d;
+    transition: transform .18s ease-out;
+}
+
+.nav-cta, .btn-primary {
+    position: relative;
+    isolation: isolate;
+}
+
+.nav-cta::before, .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.24) 50%, transparent 65%);
+    transform: translateX(-130%);
+    animation: premiumSweep 4.5s ease-in-out infinite 1.2s;
+}
+
+.service-card {
+    animation-timing-function: cubic-bezier(.2,.75,.2,1);
+}
+
+@keyframes premiumSweep {
+    0%, 72% { transform: translateX(-130%); }
+    100% { transform: translateX(130%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         scroll-behavior: auto !important;

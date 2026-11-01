@@ -1,3 +1,10 @@
+const sellerCard = document.querySelector('.seller-card');
+sellerCard?.addEventListener('pointermove', (event) => {
+    const rect = sellerCard.getBoundingClientRect();
+    sellerCard.style.setProperty('--seller-glow-x', `${event.clientX - rect.left}px`);
+    sellerCard.style.setProperty('--seller-glow-y', `${event.clientY - rect.top}px`);
+});
+
 const sellerLoginForm = document.getElementById("sellerLoginForm");
 const loginMessage = document.getElementById("loginMessage");
 

@@ -16,6 +16,11 @@
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
+    animation: pageEntrance .7s ease-out both;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(212,163,115,.09), transparent 28%),
+        var(--bg);
     background: var(--bg);
     color: var(--text);
     font-family: Arial, sans-serif;
@@ -52,6 +57,25 @@ body {
     border-radius: 24px;
     padding: 42px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: cardEntrance .9s cubic-bezier(.2,.75,.2,1) both;
+    transform-style: preserve-3d;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.login-card::before {
+    content: "";
+    position: absolute;
+    left: var(--glow-x, 50%);
+    top: var(--glow-y, 50%);
+    width: 180px;
+    height: 180px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,163,115,.09), transparent 70%);
+    pointer-events: none;
+}
 }
 
 .logo {
@@ -131,6 +155,9 @@ body {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .login-btn:hover {
@@ -167,6 +194,29 @@ body {
 .signup-text a {
     color: var(--accent);
     text-decoration: none;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(212,163,115,.22);
+}
+
+.form-group input:focus {
+    box-shadow: 0 0 0 4px rgba(212,163,115,.09), 0 0 24px rgba(212,163,115,.08);
+}
+
+@keyframes pageEntrance {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes cardEntrance {
+    from { opacity: 0; transform: translateY(34px) scale(.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
 .back-home {
