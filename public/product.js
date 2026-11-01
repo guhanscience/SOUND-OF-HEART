@@ -64,6 +64,12 @@ function addToCart(productId) {
     saveCart(cart);
 }
 
+function escapeHtml(value) {
+    const element = document.createElement("span");
+    element.textContent = String(value ?? "");
+    return element.innerHTML;
+}
+
 function renderProducts() {
     productsGrid.innerHTML = products.map(product => {
         const quantity = Number.isFinite(Number(product.quantity)) ? Number(product.quantity) : 10;
@@ -71,13 +77,13 @@ function renderProducts() {
         <article class="product-card ${quantity === 0 ? "out-of-stock" : ""}">
             <div class="product-image-wrap">
                 ${product.photo
-                    ? `<img class="product-photo" src="${product.photo}" alt="${product.name}">`
+                    ? `<img class="product-photo" src="${escapeHtml(product.photo)}" alt="${escapeHtml(product.name)}">`
                     : `<div class="product-art" aria-hidden="true">♪</div>`}
                 ${quantity === 0 ? `<span class="stock-label">Out of Stock</span>` : ""}
             </div>
             <p class="product-type">Sound of Heart</p>
-            <h2>${product.name}</h2>
-            <p class="product-details">${product.details}</p>
+            <h2>${escapeHtml(product.name)}</h2>
+            <p class="product-details">${escapeHtml(product.details)}</p>
             <p class="stock-count">${quantity > 0 ? `${quantity} in stock` : "Unavailable"}</p>
             <div class="product-footer">
                 <strong>₹${product.price.toLocaleString("en-IN")}</strong>
@@ -184,6 +190,10 @@ if (yourOrderButton) {
 document.getElementById("refreshButton").addEventListener("click", () => {
     window.location.reload();
 });
+
+if (!productsGrid || !cartCount || !userName) {
+    throw new Error("Product page elements are missing.");
+}
 
 renderProducts();
 updateCartCount();

@@ -2,6 +2,8 @@ const paymentForm = document.getElementById("paymentForm");
 const paymentPhoto = document.getElementById("paymentPhoto");
 const paymentMessage = document.getElementById("paymentMessage");
 
+if (!paymentForm || !paymentPhoto || !paymentMessage) throw new Error("Payment evidence form elements are missing.");
+
 function readFileAsDataUrl(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();

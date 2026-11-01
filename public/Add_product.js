@@ -1,5 +1,11 @@
 const productForm = document.getElementById("productForm");
 const productMessage = document.getElementById("productMessage");
+
+if (!productForm || !productMessage) throw new Error("Seller product form elements are missing.");
+if (!localStorage.getItem("sellerToken")) {
+    window.location.replace("add_product_login.html");
+}
+
 document.getElementById("sellerName").textContent = localStorage.getItem("sellerName") || "Seller";
 
 function readProductPhoto(file) {
@@ -14,6 +20,11 @@ function readProductPhoto(file) {
 productForm.addEventListener("submit", async event => {
     event.preventDefault();
     const file = document.getElementById("productPhoto").files[0];
+    if (!file) {
+        productMessage.textContent = "Please select a product photo.";
+        productMessage.style.color = "var(--error)";
+        return;
+    }
 
     try {
         const response = await fetch("/api/seller/products", {

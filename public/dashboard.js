@@ -439,7 +439,7 @@ async function askSpeakerAI() {
     chat.innerHTML += `
         <div class="ai-user">
             <strong>You:</strong><br>
-            ${question}
+            ${escapeHtml(question)}
         </div>
     `;
 
@@ -466,28 +466,31 @@ async function askSpeakerAI() {
 
         if(data.problem){
 
-            const followUpQuestions = Array.isArray(data.questions)
-                ? `<br><br>Questions to confirm:<br>• ${data.questions.join("<br>• ")}`
+            const questions = Array.isArray(data.questions) ? data.questions.map(escapeHtml) : [];
+            const causes = Array.isArray(data.causes) ? data.causes.map(escapeHtml) : [];
+            const solutions = Array.isArray(data.solutions) ? data.solutions.map(escapeHtml) : [];
+            const followUpQuestions = questions.length
+                ? `<br><br>Questions to confirm:<br>• ${questions.join("<br>• ")}`
                 : "";
 
             answer = `
-                <strong>${data.problem}</strong>
+                <strong>${escapeHtml(data.problem)}</strong>
 
                 <br><br>
 
                 Causes:<br>
-                • ${data.causes.join("<br>• ")}
+                • ${causes.join("<br>• ")}
 
                 <br><br>
 
                 Solutions:<br>
-                • ${data.solutions.join("<br>• ")}
+                • ${solutions.join("<br>• ")}
                 ${followUpQuestions}
             `;
 
         } else {
 
-            answer = data.answer;
+            answer = escapeHtml(data.answer || "Unable to identify the issue.");
         }
 
         chat.innerHTML += `

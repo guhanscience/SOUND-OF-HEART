@@ -1,6 +1,10 @@
 const form = document.getElementById("registerForm");
 const message = document.getElementById("registerMessage");
 
+if (!form || !message) {
+    throw new Error("Registration form elements are missing.");
+}
+
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
 

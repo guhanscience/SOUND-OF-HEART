@@ -1,6 +1,8 @@
 const planMessage = document.getElementById("planMessage");
 const registration = sessionStorage.getItem("sellerRegistration");
 
+if (!planMessage) throw new Error("Seller plan message is missing.");
+
 document.querySelectorAll("[data-plan]").forEach(button => {
     button.addEventListener("click", () => {
         if (!registration) {

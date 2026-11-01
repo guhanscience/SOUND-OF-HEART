@@ -14,7 +14,13 @@ function getCart() {
 }
 
 function formatPrice(price) {
-    return `₹${price.toLocaleString("en-IN")}`;
+    return `₹${Number(price).toLocaleString("en-IN")}`;
+}
+
+function escapeHtml(value) {
+    const element = document.createElement("span");
+    element.textContent = String(value ?? "");
+    return element.innerHTML;
 }
 
 function renderCart() {
@@ -39,8 +45,8 @@ function renderCart() {
         <article class="cart-item">
             <div>
                 <p class="product-type">${item.quantity} ×</p>
-                <h2>${item.name}</h2>
-                <p class="product-details">${item.details}</p>
+                <h2>${escapeHtml(item.name)}</h2>
+                <p class="product-details">${escapeHtml(item.details)}</p>
             </div>
             <strong>${formatPrice(item.price * item.quantity)}</strong>
             <button type="button" class="remove-button" data-remove-id="${item.id}">Remove</button>
@@ -83,6 +89,10 @@ async function loadUserName() {
     } catch (error) {
         console.error("Unable to load user name:", error);
     }
+}
+
+if (!cartItems || !cartTotal || !buyNowButton || !orderMessage || !userName) {
+    throw new Error("Cart page elements are missing.");
 }
 
 renderCart();

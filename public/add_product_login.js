@@ -1,6 +1,8 @@
 const sellerLoginForm = document.getElementById("sellerLoginForm");
 const loginMessage = document.getElementById("loginMessage");
 
+if (!sellerLoginForm || !loginMessage) throw new Error("Seller login form elements are missing.");
+
 sellerLoginForm.addEventListener("submit", async event => {
     event.preventDefault();
 

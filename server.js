@@ -968,7 +968,7 @@ app.post("/api/seller/login", async (req, res) => {
         AND status = 'Approved'
         ORDER BY id DESC
         LIMIT 1
-    `).get(name?.trim(),);
+    `).get(name?.trim());
 
     if (!application || !(await bcrypt.compare(password || "", application.password))) {
         return res.status(401).json({ success: false, message: "Seller name or password is incorrect, or registration is not approved yet." });
@@ -1007,26 +1007,107 @@ function ensureOrdersTable() {
         delivered_at TEXT,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )`);
-    try { db.prepare("ALTER TABLE orders ADD COLUMN tracking_stage TEXT NOT NULL DEFAULT 'Ordered'").run(); } catch (_) {}
-    try { db.prepare("ALTER TABLE orders ADD COLUMN delivered_at TEXT").run(); } catch (_) {}
+
+    const columns = new Set(db.pragma("table_info(orders)").map(column => column.name));
+    const required = ["token", "username", "gpay_number", "gmail_id", "address", "payment_method", "cart", "total", "status", "tracking_stage", "delivered_at"];
+    if (required.some(column => !columns.has(column))) {
+        db.exec(`CREATE TABLE orders_migrated (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            token TEXT NOT NULL UNIQUE,
+            username TEXT NOT NULL,
+            gpay_number TEXT,
+            gmail_id TEXT NOT NULL,
+            address TEXT NOT NULL,
+            payment_method TEXT NOT NULL,
+            cart TEXT NOT NULL,
+            total REAL NOT NULL,
+            status TEXT NOT NULL DEFAULT 'Pending',
+            tracking_stage TEXT NOT NULL DEFAULT 'Ordered',
+            delivered_at TEXT,
+            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )`);
+
+        const oldRows = db.prepare("SELECT * FROM orders").all();
+        const migrate = db.transaction(() => {
+            const insert = db.prepare(`INSERT INTO orders_migrated
+                (id, token, username, gpay_number, gmail_id, address, payment_method, cart, total, status, tracking_stage, delivered_at, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+            for (const row of oldRows) {
+                insert.run(
+                    row.id,
+                    crypto.randomBytes(24).toString("hex"),
+                    row.customer_name || row.username || "Legacy Customer",
+                    row.gpay_number || "",
+                    row.gmail_id || "",
+                    row.address || "Address unavailable",
+                    row.payment_method || "Cash on Delivery",
+                    "[]",
+                    Number(row.total) || 0,
+                    row.status || row.order_status || "Pending",
+                    row.tracking_stage || "Ordered",
+                    row.delivered_at || null,
+                    row.created_at || new Date().toISOString()
+                );
+            }
+        });
+        migrate();
+        db.exec("DROP TABLE orders; ALTER TABLE orders_migrated RENAME TO orders;");
+    }
 }
 
+const builtinCatalog = {
+    "heart-mini": { price: 2499, quantity: 10 },
+    "heart-bar": { price: 7999, quantity: 10 },
+    "heart-woofer": { price: 11999, quantity: 10 },
+    "heart-cable": { price: 799, quantity: 10 }
+};
+
 app.post("/api/orders", (req, res) => {
-    const { username, gpayNumber, gmailId, address, paymentMethod, cart, total } = req.body;
+    const { username, gpayNumber, gmailId, address, paymentMethod, cart } = req.body;
     if (!username?.trim() || !gmailId?.trim() || !address?.trim() || !address.toLowerCase().includes("guduvancherry") || !Array.isArray(cart) || cart.length === 0) {
         return res.status(400).json({ success: false, message: "Delivery is only within Guduvancherry surroundings. Please enter the word Guduvancherry." });
+    }
+
+    let calculatedTotal = 0;
+    try {
+        const transaction = db.transaction(() => {
+            for (const item of cart) {
+                const quantity = Number(item.quantity);
+                if (!item.id || !Number.isInteger(quantity) || quantity < 1) throw new Error("Invalid cart quantity.");
+
+                if (builtinCatalog[item.id]) {
+                    const product = builtinCatalog[item.id];
+                    if (quantity > product.quantity) throw new Error("One or more products have insufficient stock.");
+                    calculatedTotal += product.price * quantity;
+                    continue;
+                }
+
+                if (!String(item.id).startsWith("seller-")) throw new Error("One or more products are unavailable.");
+                const sellerId = Number(String(item.id).slice(7));
+                if (!Number.isInteger(sellerId)) throw new Error("One or more products are unavailable.");
+                const sellerProduct = db.prepare("SELECT id, price, quantity FROM seller_products WHERE id = ?").get(sellerId);
+                if (!sellerProduct) throw new Error("One or more products are unavailable.");
+                if (quantity > sellerProduct.quantity) throw new Error("One or more products have insufficient stock.");
+                calculatedTotal += Number(sellerProduct.price) * quantity;
+                db.prepare("UPDATE seller_products SET quantity = quantity - ? WHERE id = ? AND quantity >= ?")
+                    .run(quantity, sellerId, quantity);
+            }
+        });
+        transaction();
+    } catch (error) {
+        return res.status(400).json({ success: false, message: error.message || "Unable to validate the cart." });
     }
 
     const token = crypto.randomBytes(24).toString("hex");
     ensureOrdersTable();
     const result = db.prepare(`INSERT INTO orders (token, username, gpay_number, gmail_id, address, payment_method, cart, total)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(token, username.trim(), gpayNumber || "", gmailId.trim(), address.trim(), paymentMethod || "Cash on Delivery", JSON.stringify(cart), Number(total) || 0);
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(token, username.trim(), gpayNumber || "", gmailId.trim(), address.trim(), paymentMethod || "Cash on Delivery", JSON.stringify(cart), calculatedTotal);
 
     const baseUrl = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
     const yesUrl = `${baseUrl}/api/orders/${result.lastInsertRowid}/confirm?token=${token}`;
     const noUrl = `${baseUrl}/api/orders/${result.lastInsertRowid}/cancel?token=${token}`;
     const mailto = `mailto:bguhan3@gmail.com?subject=${encodeURIComponent("New SOH order #" + result.lastInsertRowid)}&body=${encodeURIComponent(
-        `New order\nUsername: ${username}\nGPay: ${gpayNumber || ""}\nGmail: ${gmailId}\nAddress: ${address}\nPayment: ${paymentMethod}\nTotal: ₹${Number(total) || 0}\n\nYES: ${yesUrl}\nNO: ${noUrl}`
+        `New order\nUsername: ${username}\nGPay: ${gpayNumber || ""}\nGmail: ${gmailId}\nAddress: ${address}\nPayment: ${paymentMethod}\nTotal: ₹${calculatedTotal}\n\nYES: ${yesUrl}\nNO: ${noUrl}`
     )}`;
 
     return res.json({ success: true, orderId: result.lastInsertRowid, trackingToken: token, yesUrl, noUrl, mailto });
@@ -1078,6 +1159,7 @@ app.post("/api/orders/:id/tracking-cancel", (req, res) => {
 });
 
 app.get("/api/orders/:id/confirm", (req, res) => {
+    ensureOrdersTable();
     const order = db.prepare("SELECT id FROM orders WHERE id = ? AND token = ?").get(Number(req.params.id), req.query.token);
     if (!order) return res.status(404).send("Order not found.");
     db.prepare("UPDATE orders SET status = 'Confirmed' WHERE id = ?").run(order.id);
@@ -1085,6 +1167,7 @@ app.get("/api/orders/:id/confirm", (req, res) => {
 });
 
 app.get("/api/orders/:id/cancel", (req, res) => {
+    ensureOrdersTable();
     const order = db.prepare("SELECT id FROM orders WHERE id = ? AND token = ?").get(Number(req.params.id), req.query.token);
     if (!order) return res.status(404).send("Order not found.");
     db.prepare("UPDATE orders SET status = 'Cancelled' WHERE id = ?").run(order.id);

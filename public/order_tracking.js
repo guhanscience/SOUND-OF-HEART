@@ -32,7 +32,21 @@ async function refreshTracking() {
     document.getElementById("elapsedTime").textContent = formatElapsed(order.elapsedMs);
 
     const products = order.cart.map(item => `${item.name} × ${item.quantity}`).join("<br>");
-    document.getElementById("orderDetails").innerHTML = `<h2>Order #${order.id}</h2><p>${products}</p><p><strong>Total:</strong> ₹${Number(order.total).toLocaleString("en-IN")}</p><p><strong>Address:</strong> ${order.address}</p>`;
+    const details = document.getElementById("orderDetails");
+    details.replaceChildren();
+    const heading = document.createElement("h2");
+    heading.textContent = `Order #${order.id}`;
+    const productInfo = document.createElement("p");
+    productInfo.textContent = products;
+    const total = document.createElement("p");
+    const totalLabel = document.createElement("strong");
+    totalLabel.textContent = "Total: ";
+    total.append(totalLabel, document.createTextNode(`₹${Number(order.total).toLocaleString("en-IN")}`));
+    const address = document.createElement("p");
+    const addressLabel = document.createElement("strong");
+    addressLabel.textContent = "Address: ";
+    address.append(addressLabel, document.createTextNode(order.address));
+    details.append(heading, productInfo, total, address);
 
     const cancelButton = document.getElementById("cancelOrder");
     const confirmButton = document.getElementById("confirmDelivery");

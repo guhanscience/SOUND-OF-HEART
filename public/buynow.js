@@ -3,6 +3,9 @@ const cart = JSON.parse(localStorage.getItem(cartKey) || "[]");
 const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 document.getElementById("orderTotal").textContent = `₹${total.toLocaleString("en-IN")}`;
 const address = document.getElementById("address");
+if (!address || !document.getElementById("addressWarning") || !document.getElementById("orderForm")) {
+    throw new Error("Checkout form elements are missing.");
+}
 const warning = document.getElementById("addressWarning");
 address.addEventListener("input", () => {
   warning.textContent = address.value.toLowerCase().includes("guduvancherry") ? "" : "Delivery is only within Guduvancherry surroundings. Please enter the word Guduvancherry.";
