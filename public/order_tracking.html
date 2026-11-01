@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Order | Sound of Heart</title><link rel="stylesheet" href="product.css"></head>
+<body>
+<nav class="shop-nav"><a href="index.html" class="logo">Sound of <span>Heart</span></a><a href="product.html" class="nav-button">Our Products</a></nav>
+<main class="shop-main"><header class="shop-heading"><p class="section-tag">Live Order Tracking</p><h1>Your Order</h1><p id="elapsedTime"></p></header>
+<section class="cart-summary">
+<div class="tracking-map">
+<div class="tracking-line"><span id="trackingProgress"></span></div>
+<div class="tracking-stage" data-stage="Ordered"><b>1</b><strong>Ordered</strong><small>Order placed</small></div>
+<div class="tracking-stage" data-stage="Shipped"><b>2</b><strong>Shipped</strong><small>After 1 day</small></div>
+<div class="tracking-stage" data-stage="Out for Delivery"><b>3</b><strong>Out for Delivery</strong><small>After 2 days</small></div>
+<div class="tracking-stage" data-stage="Delivered"><b>4</b><strong>Delivered</strong><small>Confirmation required</small></div>
+</div>
+<div id="orderDetails" style="margin-top:28px"></div>
+<p id="trackingMessage" class="order-message"></p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+<button id="cancelOrder" class="remove-button">Cancel Order</button>
+<button id="confirmDelivery" class="buy-button" style="display:none">Order Confirmation</button>
+<button id="emailOrder" class="nav-button" style="display:none">Email Order Information</button>
+</div></section></main>
+<footer class="shop-footer"><strong>Made in India</strong><p>Sound of Heart delivery support</p></footer><script src="order_tracking.js"></script></body></html>

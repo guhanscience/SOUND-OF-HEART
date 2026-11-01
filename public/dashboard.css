@@ -27,6 +27,7 @@ body {
     padding: 18px 5%;
     border-bottom: 1px solid var(--border);
     background: #0d0d0d;
+    box-shadow: 0 10px 35px rgba(212,163,115,.08);
 }
 
 .logo {
@@ -51,7 +52,7 @@ body {
     color: var(--text-muted);
 }
 
-.nav-right button {
+.nav-right button, .nav-right .nav-button { text-decoration: none; display:inline-block;
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text);
@@ -60,7 +61,7 @@ body {
     cursor: pointer;
 }
 
-.nav-right button:hover {
+.nav-right button:hover, .nav-right .nav-button:hover {
     border-color: var(--accent);
     color: var(--accent);
 }

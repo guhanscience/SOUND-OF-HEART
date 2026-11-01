@@ -61,9 +61,7 @@ buyNowButton.addEventListener("click", () => {
         return;
     }
 
-    orderMessage.innerHTML = "Your Order Placed Successfully<br>Delivered within Three Days";
-    localStorage.removeItem(cartStorageKey);
-    renderCart();
+    window.location.href = "buynow.html";
 });
 
 async function loadUserName() {
@@ -75,7 +73,7 @@ async function loadUserName() {
 
     try {
         const response = await fetch("/api/me", {
-            headers: { "Authorization": `Bearer ${authToken}` }
+            headers: { "Authorization": "Bearer " + authToken }
         });
         const data = await response.json();
 

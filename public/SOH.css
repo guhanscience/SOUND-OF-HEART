@@ -177,6 +177,15 @@ body {
     color: var(--text-muted);
 }
 
+body { background-image: radial-gradient(circle at 20% 10%, rgba(212,163,115,.08), transparent 30%), linear-gradient(180deg,#0a0a0a,#0d0d0d); }
+.navbar { box-shadow: 0 8px 35px rgba(212,163,115,.08); }
+.btn-primary, .nav-cta { box-shadow: 0 10px 30px rgba(212,163,115,.22); }
+.btn, .service-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(212,163,115,.25); }
+.service-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 18px 45px rgba(0,0,0,.45); }
+.hero-content { animation: sohFade .8s ease-out both; }
+@keyframes sohFade { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+
 @media (max-width: 800px) {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);

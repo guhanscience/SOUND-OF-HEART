@@ -5,7 +5,7 @@ if (localStorage.getItem("authToken")) {
     fetch("/api/me", {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
         }
     })
         .then(response => {
@@ -62,6 +62,7 @@ form.addEventListener("submit", async function (e) {
         }
 
         localStorage.setItem("authToken", data.token);
+        if ("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome again to SOH"));
 
         message.textContent =
             "Login successful! Redirecting...";

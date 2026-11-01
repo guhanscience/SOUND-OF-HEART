@@ -51,7 +51,9 @@ function updateCartCount() {
 function addToCart(productId) {
     const product = products.find(item => item.id === productId);
     const cart = getCart();
+    const stock = Number(product.quantity ?? 10);
     const existingItem = cart.find(item => item.id === productId);
+    if (stock <= 0 || (existingItem && existingItem.quantity >= stock)) return;
 
     if (existingItem) {
         existingItem.quantity += 1;
@@ -63,23 +65,35 @@ function addToCart(productId) {
 }
 
 function renderProducts() {
-    productsGrid.innerHTML = products.map(product => `
-        <article class="product-card">
-            ${product.photo
-                ? `<img class="product-photo" src="${product.photo}" alt="${product.name}">`
-                : `<div class="product-art" aria-hidden="true">♪</div>`}
+    productsGrid.innerHTML = products.map(product => {
+        const quantity = Number.isFinite(Number(product.quantity)) ? Number(product.quantity) : 10;
+        return `
+        <article class="product-card ${quantity === 0 ? "out-of-stock" : ""}">
+            <div class="product-image-wrap">
+                ${product.photo
+                    ? `<img class="product-photo" src="${product.photo}" alt="${product.name}">`
+                    : `<div class="product-art" aria-hidden="true">♪</div>`}
+                ${quantity === 0 ? `<span class="stock-label">Out of Stock</span>` : ""}
+            </div>
             <p class="product-type">Sound of Heart</p>
             <h2>${product.name}</h2>
             <p class="product-details">${product.details}</p>
+            <p class="stock-count">${quantity > 0 ? `${quantity} in stock` : "Unavailable"}</p>
             <div class="product-footer">
                 <strong>₹${product.price.toLocaleString("en-IN")}</strong>
-                <button type="button" class="add-button" data-product-id="${product.id}">Add to Cart</button>
+                <div><button type="button" class="add-button" data-product-id="${product.id}" ${quantity === 0 ? "disabled" : ""}>${quantity === 0 ? "Unavailable" : "Add to Cart"}</button> <button type="button" class="buy-button" data-buy-id="${product.id}" ${quantity === 0 ? "disabled" : ""}>Buy Now</button></div>
             </div>
-        </article>
-    `).join("");
+        </article>`;
+    }).join("");
 
     productsGrid.querySelectorAll("[data-product-id]").forEach(button => {
         button.addEventListener("click", () => addToCart(button.dataset.productId));
+    });
+    productsGrid.querySelectorAll("[data-buy-id]").forEach(button => {
+        button.addEventListener("click", () => {
+            addToCart(button.dataset.buyId);
+            window.location.href = "buynow.html";
+        });
     });
 }
 
@@ -89,7 +103,7 @@ async function loadSellerProducts() {
         const data = await response.json();
 
         if (response.ok && data.products.length > 0) {
-            products = [...products, ...data.products.map(product => ({
+                    products = [...products, ...data.products.map(product => ({
                 ...product,
                 id: `seller-${product.id}`
             }))];
@@ -109,7 +123,7 @@ async function loadUserName() {
 
     try {
         const response = await fetch("/api/me", {
-            headers: { "Authorization": `Bearer ${authToken}` }
+            headers: { "Authorization": "Bearer " + authToken }
         });
         const data = await response.json();
 
@@ -118,6 +132,24 @@ async function loadUserName() {
         }
     } catch (error) {
         console.error("Unable to load user name:", error);
+    }
+}
+
+const yourOrderButton = document.getElementById("yourOrderButton");
+if (yourOrderButton) {
+    const activeOrderJson = localStorage.getItem("soundOfHeartActiveOrder");
+    yourOrderButton.style.display = activeOrderJson ? "inline-block" : "none";
+    if (activeOrderJson) {
+        const activeOrder = JSON.parse(activeOrderJson);
+        fetch(`/api/orders/${activeOrder.orderId}/tracking?token=${encodeURIComponent(activeOrder.trackingToken)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.order && (data.order.status === "Delivered" || data.order.status === "Cancelled")) {
+                    localStorage.removeItem("soundOfHeartActiveOrder");
+                    yourOrderButton.style.display = "none";
+                }
+            })
+            .catch(() => {});
     }
 }
 

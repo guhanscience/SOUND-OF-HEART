@@ -94,10 +94,17 @@ db.exec(`
         price REAL NOT NULL,
         details TEXT NOT NULL,
         photo TEXT NOT NULL,
+        quantity INTEGER NOT NULL DEFAULT 0,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (application_id) REFERENCES seller_applications(id) ON DELETE CASCADE
     )
 `);
+
+try {
+    db.prepare("ALTER TABLE seller_products ADD COLUMN quantity INTEGER NOT NULL DEFAULT 0").run();
+} catch (error) {
+    if (!String(error.message).includes("duplicate column name")) throw error;
+}
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -252,11 +259,21 @@ async function notifySellerReview(application) {
     }
 
     const baseUrl = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
+    const approveUrl = `${baseUrl}/api/seller/applications/${application.id}/approve?token=${application.review_token}`;
+    const rejectUrl = `${baseUrl}/api/seller/applications/${application.id}/reject?token=${application.review_token}`;
     const payload = {
         to: "+919952433437",
         message: `New seller application from ${application.name}. Plan: ${application.plan}.`,
-        approveUrl: `${baseUrl}/api/seller/applications/${application.id}/approve?token=${application.review_token}`,
-        rejectUrl: `${baseUrl}/api/seller/applications/${application.id}/reject?token=${application.review_token}`
+        approveUrl,
+        rejectUrl,
+        acceptUrl: approveUrl,
+        rejectUrl,
+        buttons: [
+            { type: "reply", title: "Accept", id: "accept", url: approveUrl },
+            { type: "reply", title: "Reject", id: "reject", url: rejectUrl }
+        ],
+        Accept: { title: "Accept", url: approveUrl },
+        Reject: { title: "Reject", url: rejectUrl }
     };
 
     try {
@@ -966,7 +983,7 @@ app.post("/api/seller/login", async (req, res) => {
 
 app.get("/api/products", (req, res) => {
     const products = db.prepare(`
-        SELECT id, name, price, details, photo
+        SELECT id, name, price, details, photo, quantity
         FROM seller_products
         ORDER BY id DESC
     `).all();
@@ -974,20 +991,121 @@ app.get("/api/products", (req, res) => {
     return res.json({ success: true, products });
 });
 
-app.post("/api/seller/products", requireSeller, (req, res) => {
-    const { name, price, details, photo } = req.body;
-    const numericPrice = Number(price);
+function ensureOrdersTable() {
+    db.exec(`CREATE TABLE IF NOT EXISTS orders (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        token TEXT NOT NULL UNIQUE,
+        username TEXT NOT NULL,
+        gpay_number TEXT,
+        gmail_id TEXT NOT NULL,
+        address TEXT NOT NULL,
+        payment_method TEXT NOT NULL,
+        cart TEXT NOT NULL,
+        total REAL NOT NULL,
+        status TEXT NOT NULL DEFAULT 'Pending',
+        tracking_stage TEXT NOT NULL DEFAULT 'Ordered',
+        delivered_at TEXT,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )`);
+    try { db.prepare("ALTER TABLE orders ADD COLUMN tracking_stage TEXT NOT NULL DEFAULT 'Ordered'").run(); } catch (_) {}
+    try { db.prepare("ALTER TABLE orders ADD COLUMN delivered_at TEXT").run(); } catch (_) {}
+}
 
-    if (!name?.trim() || !Number.isFinite(numericPrice) || numericPrice < 0 || !details?.trim() || !photo?.startsWith("data:image/")) {
-        return res.status(400).json({ success: false, message: "Please provide a product name, valid price, details, and photo." });
+app.post("/api/orders", (req, res) => {
+    const { username, gpayNumber, gmailId, address, paymentMethod, cart, total } = req.body;
+    if (!username?.trim() || !gmailId?.trim() || !address?.trim() || !address.toLowerCase().includes("guduvancherry") || !Array.isArray(cart) || cart.length === 0) {
+        return res.status(400).json({ success: false, message: "Delivery is only within Guduvancherry surroundings. Please enter the word Guduvancherry." });
+    }
+
+    const token = crypto.randomBytes(24).toString("hex");
+    ensureOrdersTable();
+    const result = db.prepare(`INSERT INTO orders (token, username, gpay_number, gmail_id, address, payment_method, cart, total)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(token, username.trim(), gpayNumber || "", gmailId.trim(), address.trim(), paymentMethod || "Cash on Delivery", JSON.stringify(cart), Number(total) || 0);
+
+    const baseUrl = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
+    const yesUrl = `${baseUrl}/api/orders/${result.lastInsertRowid}/confirm?token=${token}`;
+    const noUrl = `${baseUrl}/api/orders/${result.lastInsertRowid}/cancel?token=${token}`;
+    const mailto = `mailto:bguhan3@gmail.com?subject=${encodeURIComponent("New SOH order #" + result.lastInsertRowid)}&body=${encodeURIComponent(
+        `New order\nUsername: ${username}\nGPay: ${gpayNumber || ""}\nGmail: ${gmailId}\nAddress: ${address}\nPayment: ${paymentMethod}\nTotal: ₹${Number(total) || 0}\n\nYES: ${yesUrl}\nNO: ${noUrl}`
+    )}`;
+
+    return res.json({ success: true, orderId: result.lastInsertRowid, trackingToken: token, yesUrl, noUrl, mailto });
+});
+
+app.get("/api/orders/:id/tracking", (req, res) => {
+    ensureOrdersTable();
+    const order = db.prepare("SELECT * FROM orders WHERE id = ? AND token = ?")
+        .get(Number(req.params.id), req.query.token);
+    if (!order) return res.status(404).json({ success: false, message: "Order not found." });
+
+    const elapsedMs = Date.now() - new Date(order.created_at + "Z").getTime();
+    let stage = "Shipped";
+    if (order.status === "Cancelled") stage = "Cancelled";
+    else if (order.status === "Delivered") stage = "Delivered";
+    else if (elapsedMs >= 2 * 24 * 60 * 60 * 1000) stage = "Out for Delivery";
+    else if (elapsedMs >= 1 * 24 * 60 * 60 * 1000) stage = "Shipped";
+    else stage = "Ordered";
+
+    return res.json({ success: true, order: {
+        id: order.id, username: order.username, gmailId: order.gmail_id, address: order.address,
+        paymentMethod: order.payment_method, total: order.total, cart: JSON.parse(order.cart || "[]"),
+        status: order.status, stage, createdAt: order.created_at, elapsedMs
+    }});
+});
+
+app.post("/api/orders/:id/tracking-confirm", (req, res) => {
+    ensureOrdersTable();
+    const order = db.prepare("SELECT * FROM orders WHERE id = ? AND token = ?")
+        .get(Number(req.params.id), req.query.token);
+    if (!order) return res.status(404).json({ success: false, message: "Order not found." });
+    const elapsedMs = Date.now() - new Date(order.created_at + "Z").getTime();
+    if (elapsedMs < 2 * 24 * 60 * 60 * 1000) return res.status(400).json({ success: false, message: "Wait for Confirmation." });
+    db.prepare("UPDATE orders SET status = 'Delivered', tracking_stage = 'Delivered', delivered_at = CURRENT_TIMESTAMP WHERE id = ?").run(order.id);
+    res.json({ success: true, message: "Order delivered successfully." });
+});
+
+app.post("/api/orders/:id/tracking-cancel", (req, res) => {
+    ensureOrdersTable();
+    const order = db.prepare("SELECT * FROM orders WHERE id = ? AND token = ?")
+        .get(Number(req.params.id), req.query.token);
+    if (!order) return res.status(404).json({ success: false, message: "Order not found." });
+    const elapsedMs = Date.now() - new Date(order.created_at + "Z").getTime();
+    if (elapsedMs >= 2 * 24 * 60 * 60 * 1000 || order.status === "Delivered") {
+        return res.status(400).json({ success: false, message: "Cancellation is no longer available after Out for Delivery." });
+    }
+    db.prepare("UPDATE orders SET status = 'Cancelled', tracking_stage = 'Cancelled' WHERE id = ?").run(order.id);
+    res.json({ success: true, message: "Order cancelled successfully." });
+});
+
+app.get("/api/orders/:id/confirm", (req, res) => {
+    const order = db.prepare("SELECT id FROM orders WHERE id = ? AND token = ?").get(Number(req.params.id), req.query.token);
+    if (!order) return res.status(404).send("Order not found.");
+    db.prepare("UPDATE orders SET status = 'Confirmed' WHERE id = ?").run(order.id);
+    res.send("<html><body><h1>Order confirmed successfully</h1></body></html>");
+});
+
+app.get("/api/orders/:id/cancel", (req, res) => {
+    const order = db.prepare("SELECT id FROM orders WHERE id = ? AND token = ?").get(Number(req.params.id), req.query.token);
+    if (!order) return res.status(404).send("Order not found.");
+    db.prepare("UPDATE orders SET status = 'Cancelled' WHERE id = ?").run(order.id);
+    res.send("<html><body><script>alert('Order cancelled'); window.location.href='/product.html';</script></body></html>");
+});
+
+app.post("/api/seller/products", requireSeller, (req, res) => {
+    const { name, price, details, photo, quantity } = req.body;
+    const numericPrice = Number(price);
+    const numericQuantity = Number(quantity);
+
+    if (!name?.trim() || !Number.isFinite(numericPrice) || numericPrice < 0 || !details?.trim() || !photo?.startsWith("data:image/") || !Number.isInteger(numericQuantity) || numericQuantity < 0) {
+        return res.status(400).json({ success: false, message: "Please provide a product name, valid price, details, photo, and stock quantity." });
     }
 
     const result = db.prepare(`
-        INSERT INTO seller_products (application_id, name, price, details, photo)
-        VALUES (?, ?, ?, ?, ?)
-    `).run(req.seller.application_id, name.trim(), numericPrice, details.trim(), photo);
+        INSERT INTO seller_products (application_id, name, price, details, photo, quantity)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `).run(req.seller.application_id, name.trim(), numericPrice, details.trim(), photo, numericQuantity);
 
-    const product = db.prepare("SELECT id, name, price, details, photo FROM seller_products WHERE id = ?")
+    const product = db.prepare("SELECT id, name, price, details, photo, quantity FROM seller_products WHERE id = ?")
         .get(result.lastInsertRowid);
 
     return res.status(201).json({ success: true, product, message: "Product added successfully." });

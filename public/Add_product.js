@@ -20,12 +20,13 @@ productForm.addEventListener("submit", async event => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("sellerToken")}`
+                "Authorization": "Bearer " + localStorage.getItem("sellerToken")
             },
             body: JSON.stringify({
                 name: document.getElementById("productName").value,
                 price: document.getElementById("productPrice").value,
                 details: document.getElementById("productDetails").value,
+                quantity: document.getElementById("productQuantity").value,
                 photo: await readProductPhoto(file)
             })
         });

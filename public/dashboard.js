@@ -21,7 +21,7 @@ const authToken = localStorage.getItem("authToken");
 function getAuthHeaders() {
     return {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${authToken}`
+        "Authorization": "Bearer " + authToken,
     };
 }
 
@@ -387,6 +387,7 @@ logoutButton.addEventListener(
 
         } finally {
 
+            if ("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance("Thank you for visiting SOH"));
             localStorage.removeItem(
                 "authToken"
             );

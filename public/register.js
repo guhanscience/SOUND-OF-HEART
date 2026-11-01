@@ -62,6 +62,7 @@ form.addEventListener("submit", async function (e) {
         }
 
         localStorage.setItem("authToken", data.token);
+        if ("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome to SOH"));
 
         message.textContent =
             "Account created successfully! Redirecting...";
