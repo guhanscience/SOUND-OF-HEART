@@ -1,0 +1,39 @@
+/* World-premium visual system — SOH */
+:root { --lux-gold: #d4a373; --lux-gold-light: #f1d3ac; --lux-ink: #090909; }
+
+html { scroll-behavior: smooth; }
+body { position: relative; isolation: isolate; }
+body::before {
+    content: ""; position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: .018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.soh-cursor-aura {
+    position: fixed; width: 280px; height: 280px; left: 0; top: 0; z-index: 9997; pointer-events: none;
+    border-radius: 50%; transform: translate(-50%, -50%); opacity: 0;
+    background: radial-gradient(circle, rgba(212,163,115,.075), rgba(212,163,115,.018) 38%, transparent 68%);
+    transition: opacity .35s ease;
+}
+.soh-scroll-progress { position: fixed; z-index: 10000; inset: 0 auto auto 0; height: 3px; width: 0; pointer-events: none; background: linear-gradient(90deg,#8c6340,var(--lux-gold-light),var(--lux-gold)); box-shadow: 0 0 16px rgba(212,163,115,.85); }
+.soh-page-reveal { animation: sohPageIn 1s cubic-bezier(.16,1,.3,1) both; }
+.soh-reveal { opacity: 0; transform: translateY(28px) scale(.985); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+.soh-reveal.is-visible { opacity: 1; transform: none; }
+.soh-lux-card { transform-style: preserve-3d; transition: transform .45s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease !important; }
+.soh-lux-card::before { transition: opacity .35s ease; }
+.soh-magnetic { transition: transform .18s cubic-bezier(.16,1,.3,1), box-shadow .25s ease !important; }
+
+nav, .navbar, .shop-nav, .seller-nav, .dashboard-nav {
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+nav a, .nav-button, button, .btn, .primary-button, .plan-button, .login-btn, .add-button, .buy-button { position: relative; overflow: hidden; }
+nav a::after, button::after, .nav-button::after, .btn::after, .primary-button::after { content: ""; position: absolute; inset: 0; transform: translateX(-145%) skewX(-20deg); background: linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent); transition: transform .7s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+nav a:hover::after, button:hover::after, .nav-button:hover::after, .btn:hover::after, .primary-button:hover::after { transform: translateX(145%) skewX(-20deg); }
+
+input, textarea, select { transition: border-color .25s ease, box-shadow .25s ease, background .25s ease, transform .25s ease !important; }
+input:focus, textarea:focus, select:focus { transform: translateY(-1px); }
+.logo { text-shadow: 0 8px 30px rgba(212,163,115,.08); }
+.logo span { text-shadow: 0 0 24px rgba(212,163,115,.2); }
+
+@keyframes sohPageIn { from { opacity: 0; filter: blur(8px); transform: translateY(12px); } to { opacity: 1; filter: none; transform: none; } }
+@media (max-width: 700px) { .soh-cursor-aura { display: none; } }
+@media (prefers-reduced-motion: reduce) { .soh-page-reveal, .soh-reveal, .soh-lux-card, .soh-magnetic { animation: none !important; transition-duration: .01ms !important; transform: none !important; } .soh-cursor-aura { display: none; } }
