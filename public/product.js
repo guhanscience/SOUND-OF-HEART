@@ -95,6 +95,34 @@ function renderProducts() {
             window.location.href = "buynow.html";
         });
     });
+    enhanceProductCards();
+}
+
+function enhanceProductCards() {
+    const cards = productsGrid.querySelectorAll(".product-card:not(.enhanced)");
+    cards.forEach((card, index) => {
+        card.classList.add("enhanced", "reveal");
+        card.style.transitionDelay = `${Math.min(index * 70, 210)}ms`;
+        card.addEventListener("pointermove", (event) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+            card.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+        });
+    });
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        cards.forEach(card => observer.observe(card));
+    } else {
+        cards.forEach(card => card.classList.add("visible"));
+    }
 }
 
 async function loadSellerProducts() {

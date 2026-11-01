@@ -186,6 +186,256 @@ body { background-image: radial-gradient(circle at 20% 10%, rgba(212,163,115,.08
 .hero-content { animation: sohFade .8s ease-out both; }
 @keyframes sohFade { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
 
+/* Premium presentation */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+.navbar {
+    transition: padding .3s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.navbar.scrolled {
+    padding: 10px 0;
+    background: rgba(10, 10, 10, 0.82);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.38);
+}
+
+.logo {
+    letter-spacing: -0.5px;
+}
+
+.nav-links a:not(.nav-cta) {
+    position: relative;
+}
+
+.nav-links a:not(.nav-cta)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -7px;
+    height: 1px;
+    background: var(--accent);
+    transition: right .25s ease;
+}
+
+.nav-links a:not(.nav-cta):hover::after {
+    right: 0;
+}
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 640px;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    background:
+        linear-gradient(120deg, rgba(10, 10, 10, .35), rgba(10, 10, 10, .88)),
+        radial-gradient(circle at 50% 20%, rgba(212, 163, 115, .11), transparent 32%);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -260px;
+    width: 820px;
+    height: 520px;
+    transform: translateX(-50%) rotate(-4deg);
+    border: 1px solid rgba(212, 163, 115, .12);
+    border-radius: 50%;
+    box-shadow: 0 -40px 120px rgba(212, 163, 115, .06);
+    z-index: -1;
+}
+
+.hero-ambient {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.hero-ambient-one {
+    width: 360px;
+    height: 360px;
+    right: -180px;
+    top: 8%;
+    border: 1px solid rgba(212, 163, 115, .15);
+    animation: orbitFloat 9s ease-in-out infinite;
+}
+
+.hero-ambient-two {
+    width: 180px;
+    height: 180px;
+    left: -70px;
+    bottom: 12%;
+    background: radial-gradient(circle, rgba(212, 163, 115, .09), transparent 68%);
+    animation: orbitFloat 7s ease-in-out infinite reverse;
+}
+
+.hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid rgba(212, 163, 115, .22);
+    border-radius: 999px;
+    background: rgba(212, 163, 115, .05);
+}
+
+.hero-tag::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent);
+}
+
+.hero h1 {
+    text-wrap: balance;
+    letter-spacing: -2px;
+    text-shadow: 0 10px 45px rgba(0, 0, 0, .5);
+}
+
+.hero-desc {
+    text-wrap: pretty;
+}
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-130%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .32), transparent);
+    transition: transform .65s ease;
+}
+
+.btn:hover::after {
+    transform: translateX(130%) skewX(-20deg);
+}
+
+.btn-primary {
+    border: 1px solid var(--accent);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+    background: rgba(212, 163, 115, .05);
+}
+
+.services {
+    position: relative;
+}
+
+.section-header h2 {
+    text-wrap: balance;
+}
+
+.service-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: 280px;
+    background: linear-gradient(145deg, rgba(28, 28, 28, .96), rgba(16, 16, 16, .96));
+    transition: transform .35s cubic-bezier(.2,.75,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 163, 115, .12), transparent 65%);
+    opacity: 0;
+    transition: opacity .25s ease;
+    z-index: -1;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card::after {
+    content: "";
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    bottom: 0;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transition: transform .35s ease;
+}
+
+.service-card:hover::after {
+    transform: scaleX(1);
+}
+
+.service-icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 163, 115, .18);
+    background: rgba(212, 163, 115, .07);
+    box-shadow: inset 0 1px rgba(255, 255, 255, .04);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+@keyframes orbitFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
 @media (max-width: 800px) {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
